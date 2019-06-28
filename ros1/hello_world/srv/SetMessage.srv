@@ -1,0 +1,5 @@
+# 引数
+string message
+---
+# 返り値
+bool result
