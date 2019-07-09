@@ -1,0 +1,3 @@
+[submodule "ros1/create_autonomy"]
+	path = ros1/create_autonomy
+	url = https://github.com/youtalk/create_autonomy.git
