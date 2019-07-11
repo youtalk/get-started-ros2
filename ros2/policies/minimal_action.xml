@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy version="0.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <profiles>
+    <profile ns="/" node="minimal_action_server">
+      <xi:include href="common/node.xml"
+        xpointer="xpointer(/profile/*)"/>
+      <actions execute="ALLOW">
+        <action>fibonacci</action>
+      </actions>
+    </profile>
+    <profile ns="/" node="minimal_action_client">
+      <xi:include href="common/node.xml"
+        xpointer="xpointer(/profile/*)"/>
+      <actions call="ALLOW">
+        <action>fibonacci</action>
+      </actions>
+    </profile>
+  </profiles>
+</policy>

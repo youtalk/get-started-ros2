@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy version="0.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <profiles>
+    <xi:include href="talker_listener.xml"
+      xpointer="xpointer(/policy/profiles/*)"/>
+    <xi:include href="add_two_ints.xml"
+      xpointer="xpointer(/policy/profiles/*)"/>
+    <xi:include href="minimal_action.xml"
+      xpointer="xpointer(/policy/profiles/*)"/>
+    <profile ns="/" node="admin">
+      <xi:include href="common/node.xml"
+        xpointer="xpointer(/profile/*)"/>
+      <actions call="ALLOW" execute="ALLOW">
+        <action>fibonacci</action>
+      </actions>
+      <services reply="ALLOW" request="ALLOW">
+        <service>add_two_ints</service>
+      </services>
+      <topics publish="ALLOW" subscribe="ALLOW">
+        <topic>chatter</topic>
+      </topics>
+    </profile>
+  </profiles>
+</policy>

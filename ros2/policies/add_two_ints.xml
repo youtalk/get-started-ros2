@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy version="0.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <profiles>
+    <profile ns="/" node="add_two_ints_server">
+      <xi:include href="common/node.xml"
+        xpointer="xpointer(/profile/*)"/>
+      <services reply="ALLOW">
+        <service>add_two_ints</service>
+      </services>
+    </profile>
+    <profile ns="/" node="add_two_ints_client">
+      <xi:include href="common/node.xml"
+        xpointer="xpointer(/profile/*)"/>
+      <services request="ALLOW">
+        <service>add_two_ints</service>
+      </services>
+    </profile>
+  </profiles>
+</policy>
