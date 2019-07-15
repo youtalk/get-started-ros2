@@ -1,7 +1,27 @@
 #+OPTIONS: author:nil email:nil creator:nil timestamp:nil
-#+OPTIONS: toc:t H:3 num:t \n:nil ^:{}
+#+OPTIONS: toc:t num:nil \n:nil ^:{}
 #+LANGUAGE: ja
 #+TITLE: 書籍「ROS2ではじめよう 次世代ロボットプログラミング」オンラインリソース
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/worg.
+
+#+ATTR_HTML: :width 400px
+[[./img/cover.png]]
+
+* ROS2ではじめよう 次世代ロボットプログラミング
+
+** 内容紹介
+
+Robot Operation System(ROS)の次世代バージョンであるROS2はロボットアプリケーション開発のためのミドルウェアです。ROS2は、ROS1で得られた経験をもとにほぼ再実装されたため、ROS1と直接的には互換性がありません。ROS1は通信内容が暗号化されておらず認証機能もありませんので、セキュリティ面で見ると商用ロボットの開発には不向きでした。ROS2ではセキュリティ、メンテナンス性、ライセンス、商業サポートなどのさまざまな観点から見直され、開発当初から製品への組み込みを目標にして再設計されています。
+
+本書は今後のロボットアプリケーション開発のデファクトスタンダードになるROS2の入門書です。基本操作から、ROS1の資産を活用するための接続方法、パッケージの開発方法までを網羅します。本書のサンプルコードはC++ですが、それ以外のプログラミング言語を用いたクライアントライブラリについても解説します。ROS1ではUbuntuのみで利用できましたが、ROS2からはWindows、macOSで利用できるようになり、さらに利用者が増えると見込まれています。主なOSの開発環境のセットアップについても解説します。これからロボット開発をはじめたいと考える方だけでなく、ROS1ユーザにとっても有用な1冊です。
+
+** 著者
+
+近藤豊(こんどうゆたか、@youtalk)
+
+株式会社Preferred Networks エンジニア。ROS Japan Users Group を主催。奈良先端科学技術大学院大学 情報科学研究科 博士後期課程 修了 博士(工学)。
+
+https://www.youtalk.jp
 
 * 正誤表
 
