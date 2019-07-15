@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>書籍「ROS2ではじめよう 次世代ロボットプログラミング」オンラインリソース</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="./css/worg.css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">書籍「ROS2ではじめよう 次世代ロボットプログラミング」オンラインリソース</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9292906">ROS2ではじめよう 次世代ロボットプログラミング</a>
+<ul>
+<li><a href="#org7735254">内容紹介</a></li>
+<li><a href="#org415516a">著者</a></li>
+<li><a href="#org2f4e581">本書の構成</a></li>
+<li><a href="#org9b517e4">書籍購入先</a></li>
+</ul>
+</li>
+<li><a href="#orgd08fd94">正誤表</a></li>
+<li><a href="#org691ca6f">サンプルコードのセットアップ</a>
+<ul>
+<li><a href="#orga528886">1章 ROS1ツアー</a></li>
+<li><a href="#orgbe54d71">2章 ROS2の開発環境セットアップ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="figure">
+<p><img src="./img/cover.png" alt="cover.png" width="400px" />
+</p>
+</div>
+
+<div id="outline-container-org9292906" class="outline-2">
+<h2 id="org9292906">ROS2ではじめよう 次世代ロボットプログラミング</h2>
+<div class="outline-text-2" id="text-org9292906">
+</div>
+<div id="outline-container-org7735254" class="outline-3">
+<h3 id="org7735254">内容紹介</h3>
+<div class="outline-text-3" id="text-org7735254">
+<p>
+Robot Operation System (ROS) の次世代バージョンであるROS2はロボットアプリケーション開発のためのミドルウェアです。ROS2は、ROS1で得られた経験をもとにほぼ再実装されたため、ROS1と直接的には互換性がありません。ROS1は通信内容が暗号化されておらず認証機能もありませんので、セキュリティ面で見ると商用ロボットの開発には不向きでした。ROS2ではセキュリティ、メンテナンス性、ライセンス、商業サポートなどのさまざまな観点から見直され、開発当初から製品への組み込みを目標にして再設計されています。
+</p>
+
+<p>
+本書は今後のロボットアプリケーション開発のデファクトスタンダードになるROS2の入門書です。基本操作から、ROS1の資産を活用するための接続方法、パッケージの開発方法までを網羅します。本書のサンプルコードはC++ですが、それ以外のプログラミング言語を用いたクライアントライブラリについても解説します。ROS1ではUbuntuのみで利用できましたが、ROS2からはWindows、macOSで利用できるようになり、さらに利用者が増えると見込まれています。主なOSの開発環境のセットアップについても解説します。これからロボット開発をはじめたいと考える方だけでなく、ROS1ユーザにとっても有用な1冊です。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org415516a" class="outline-3">
+<h3 id="org415516a">著者</h3>
+<div class="outline-text-3" id="text-org415516a">
+<p>
+近藤豊 (こんどうゆたか、@youtalk)
+</p>
+
+<p>
+株式会社Preferred Networks エンジニア。ROS Japan Users Group を主宰。奈良先端科学技術大学院大学 情報科学研究科 博士後期課程 修了 博士 (工学)。
+</p>
+
+<p>
+<a href="https://www.youtalk.jp">https://www.youtalk.jp</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2f4e581" class="outline-3">
+<h3 id="org2f4e581">本書の構成</h3>
+<div class="outline-text-3" id="text-org2f4e581">
+<p>
+誌面より
+</p>
+
+<blockquote>
+<dl class="org-dl">
+<dt>はじめに</dt><dd>本章です。ROSの概要を紹介します。</dd>
+
+<dt>1章 ROS1ツアー</dt><dd>ROS1を知らない方、使ったことがない方に向けて、ROS1の備える機能を駆け足で紹介します。ROS1をすでに使ったことがある方は読み飛ばしていただいても結構です。</dd>
+
+<dt>2章 ROS2の開発環境セットアップ</dt><dd>ROS2の開発環境をセットアップします。OSには一番セットアップが簡単なUbuntu 18.04を採用して進めますが、ROS2はWindows 10にもmacOSにも対応しています。その他のOSへのインストールは付録をご覧ください。</dd>
+
+<dt>3章 ROS2の基本機能</dt><dd>まず、ROS1とROS2との比較を行い、なぜROS2が必要になったかを理解します。その後、ROS2が備える改善されたメッセージ通信機能を一通り紹介します。また、そのメッセージ通信を支える技術であるDDS (Data Distribution Service) 、ROS2のコマンドラインインタフェースやビルドツールについても紹介します。</dd>
+
+<dt>4章 ROS2の応用機能</dt><dd>ROS2で新たに機能追加、改善された機能を紹介します。これらの概念を理解し使いこなせるようになれば、ROS2を習得したといっても良いのではないでしょうか。</dd>
+
+<dt>5章 ROS2に対応したツール／パッケージ</dt><dd>ROS2は正式リリースから2年以上が経過したとはいえ、すべてのROS1パッケージがROS2に移行しているわけではありません。現在移行が進んでいるパッケージの中から特に大切なものを選んで紹介します。</dd>
+
+<dt>6章 Roomba用ROS1ドライバのROS2移行</dt><dd>ROS1パッケージの開発経験者は、ROS2の基本機能、応用機能、既存パッケージの存在を学んだ後、次に自分のROS1パッケージをROS2に対応させたくなるはずです。本章ではiRobotのRoomba用ROS1ドライバをROS2に対応させる移行作業を通じて、実践的なROS2プログラミングを学びます。</dd>
+
+<dt>7章 Pythonクライアントライブラリrclpy</dt><dd>本書ではソースコード例のプログラミング言語にC++14を用いています。ROS2の公式クライアントライブラリとして最も盛んにメンテナンスされているのが、C++版のクライアントライブラリ <code>rclcpp</code> だからです。それ以外のプログラミング言語の中から、本章ではスクリプト言語Python3のクライアントライブラリ <code>rclpy</code> を取り上げ、プログラミング方法を説明します。</dd>
+
+<dt>おわりに</dt><dd>本書に込めた熱い気持ちを最後にまとめました。本書を手にとって最後まで読み進んでいただいた読者の皆様と、本書を執筆するにあたってご協力いただいた様々な方々への感謝の言葉も綴っています。</dd>
+
+<dt>付録</dt><dd>本文で扱わなかったUbuntu 18.04以外のOSへのインストール手順や、サンプルコードのライセンス条項を記載します。また、3章、4章で紹介した内容よりも、さらに上級者向けのROS2プログラミング手法をご紹介します。</dd>
+</dl>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org9b517e4" class="outline-3">
+<h3 id="org9b517e4">書籍購入先</h3>
+<div class="outline-text-3" id="text-org9b517e4">
+<ul class="org-ul">
+<li><a href="https://www.amazon.co.jp/dp/4297107422">Amazon</a></li>
+<li><a href="https://books.rakuten.co.jp/rb/15963562/">楽天ブックス</a></li>
+<li><a href="https://honto.jp/netstore/pd-book_29745146.html">honto</a></li>
+<li><a href="https://www.hmv.co.jp/artist_%E8%BF%91%E8%97%A4%E8%B1%8A_000000000722015/item_ROS2%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%88%E3%81%86-%E6%AC%A1%E4%B8%96%E4%BB%A3%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0_9996608">HMV&amp;BOOKS online</a></li>
+<li><a href="https://www.yodobashi.com/product/100000009003160906/">ヨドバシ.com</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd08fd94" class="outline-2">
+<h2 id="orgd08fd94">正誤表</h2>
+</div>
+
+<div id="outline-container-org691ca6f" class="outline-2">
+<h2 id="org691ca6f">サンプルコードのセットアップ</h2>
+<div class="outline-text-2" id="text-org691ca6f">
+</div>
+<div id="outline-container-orga528886" class="outline-3">
+<h3 id="orga528886">1章 ROS1ツアー</h3>
+<div class="outline-text-3" id="text-orga528886">
+<p>
+誌面より
+</p>
+
+<blockquote>
+<p>
+次項からステップバイステップで実装していくROS1デモパッケージ <code>hello_world</code> のソースコードはオンラインリソース
+</p>
+
+<p>
+<a href="https://github.com/youtalk/get-started-ros2/tree/release/ros1/hello_world">https://github.com/youtalk/get-started-ros2/tree/release/ros1/hello_world</a>
+</p>
+
+<p>
+にビルド可能な形で全て保存されています。
+本文では紙面の都合上、ライセンスやインクルード文などを省略し、ソースコードも一部のみを抜粋して記載しています。ソースコード全体をご覧になりたい場合には、こちらをご参照ください。
+ライセンス条項に関しては、まとめて付録に記載しています。
+</p>
+
+<p>
+サンプルコードのセットアップ方法は以下の通りです。適宜、本文と照らし合わせながら読み進めていってください。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ cd ~/ &amp;&amp; git clone https://github.com/youtalk/get-started-ros2.git
+$ cd get-started-ros2 &amp;&amp; git submodule update --init
+$ mkdir ~/ros1 &amp;&amp; <span style="color: #839496; font-weight: bold;">cd</span> ~/ros1
+$ ln -s ~/get-started-ros2/ros1 src
+$ rosdep install --from-paths src --ignore-src -r -y
+$ catkin init
+$ catkin build
+$ catkin source
+</pre>
+</div>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgbe54d71" class="outline-3">
+<h3 id="orgbe54d71">2章 ROS2の開発環境セットアップ</h3>
+<div class="outline-text-3" id="text-orgbe54d71">
+<p>
+誌面より
+</p>
+
+<blockquote>
+<p>
+次章からステップバイステップで実装していくROS2デモパッケージ <code>hello_world</code> および、4章、7章で使用するパッケージのソースコードはオンラインリソース
+</p>
+
+<p>
+<a href="https://github.com/youtalk/get-started-ros2/tree/release/ros2">https://github.com/youtalk/get-started-ros2/tree/release/ros2</a>
+</p>
+
+<p>
+以下にビルド可能な形で全て保存されています。
+本文では紙面の都合上、ライセンスやインクルード文などを省略し、ソースコードも一部のみを抜粋して記載しています。ソースコード全体をご覧になりたい場合には、こちらをご参照ください。
+ライセンス条項に関しては、まとめて付録に記載しています。
+</p>
+
+<p>
+サンプルコードのセットアップ方法は以下の通りです。適宜、本文と照らし合わせながら読み進めていってください。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ cd ~/ &amp;&amp; git clone https://github.com/youtalk/get-started-ros2.git
+$ cd get-started-ros2 &amp;&amp; git submodule update --init
+$ mkdir ~/ros2 &amp;&amp; <span style="color: #839496; font-weight: bold;">cd</span> ~/ros2
+$ ln -s ~/get-started-ros2/ros2 src
+$ rosdep install --from-paths src --ignore-src -r -y
+$ colcon build
+$ . ~/ros2/install/setup.bash
+</pre>
+</div>
+
+<p>
+<code>colcon</code> コマンドは、ROSパッケージのビルドツールです。次章で解説します。
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
