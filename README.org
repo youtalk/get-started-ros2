@@ -112,6 +112,4 @@ $ rosdep install --from-paths src --ignore-src -r -y
 $ colcon build
 $ . ~/ros2/install/setup.bash
 #+END_SRC
-
-~colcon~ コマンドは、ROSパッケージのビルドツールです。次章で解説します。
 #+END_QUOTE
