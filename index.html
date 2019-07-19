@@ -233,19 +233,32 @@ for the JavaScript code in this tag.
 <h2>&#30446;&#27425;</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9292906">ROS2ではじめよう 次世代ロボットプログラミング</a>
+<li><a href="#org64b0263">ROS2ではじめよう 次世代ロボットプログラミング</a>
 <ul>
-<li><a href="#org7735254">内容紹介</a></li>
-<li><a href="#org415516a">著者</a></li>
-<li><a href="#org2f4e581">本書の構成</a></li>
-<li><a href="#org9b517e4">書籍購入先</a></li>
+<li><a href="#orgfa164e2">内容紹介</a></li>
+<li><a href="#orgef47320">著者</a></li>
+<li><a href="#org1223eb8">本書の構成</a>
+<ul>
+<li><a href="#org90d2b98">はじめに</a></li>
+<li><a href="#org0e347f5">1章 ROS1ツアー</a></li>
+<li><a href="#org3c25ff2">2章 ROS2の開発環境セットアップ</a></li>
+<li><a href="#orge839ef8">3章 ROS2の基本機能</a></li>
+<li><a href="#org8988ca2">4章 ROS2の応用機能</a></li>
+<li><a href="#org0012bf8">5章 ROS2に対応したツール／パッケージ</a></li>
+<li><a href="#org9c8394c">6章 Roomba用ROS1ドライバのROS2移行</a></li>
+<li><a href="#org2b119fc">7章 Pythonクライアントライブラリrclpy</a></li>
+<li><a href="#org00fe810">おわりに</a></li>
+<li><a href="#org9a7dac8">付録</a></li>
 </ul>
 </li>
-<li><a href="#orgd08fd94">正誤表</a></li>
-<li><a href="#org691ca6f">サンプルコードのセットアップ</a>
+<li><a href="#orgf868ac3">書籍購入先</a></li>
+</ul>
+</li>
+<li><a href="#orgb538687">正誤表</a></li>
+<li><a href="#orga9e5283">サンプルコードのセットアップ</a>
 <ul>
-<li><a href="#orga528886">1章 ROS1ツアー</a></li>
-<li><a href="#orgbe54d71">2章 ROS2の開発環境セットアップ</a></li>
+<li><a href="#org6623376">1章 ROS1ツアー</a></li>
+<li><a href="#org9e55b88">2章 ROS2の開発環境セットアップ</a></li>
 </ul>
 </li>
 </ul>
@@ -257,13 +270,13 @@ for the JavaScript code in this tag.
 </p>
 </div>
 
-<div id="outline-container-org9292906" class="outline-2">
-<h2 id="org9292906">ROS2ではじめよう 次世代ロボットプログラミング</h2>
-<div class="outline-text-2" id="text-org9292906">
+<div id="outline-container-org64b0263" class="outline-2">
+<h2 id="org64b0263">ROS2ではじめよう 次世代ロボットプログラミング</h2>
+<div class="outline-text-2" id="text-org64b0263">
 </div>
-<div id="outline-container-org7735254" class="outline-3">
-<h3 id="org7735254">内容紹介</h3>
-<div class="outline-text-3" id="text-org7735254">
+<div id="outline-container-orgfa164e2" class="outline-3">
+<h3 id="orgfa164e2">内容紹介</h3>
+<div class="outline-text-3" id="text-orgfa164e2">
 <p>
 Robot Operation System (ROS) の次世代バージョンであるROS2はロボットアプリケーション開発のためのミドルウェアです。ROS2は、ROS1で得られた経験をもとにほぼ再実装されたため、ROS1と直接的には互換性がありません。ROS1は通信内容が暗号化されておらず認証機能もありませんので、セキュリティ面で見ると商用ロボットの開発には不向きでした。ROS2ではセキュリティ、メンテナンス性、ライセンス、商業サポートなどのさまざまな観点から見直され、開発当初から製品への組み込みを目標にして再設計されています。
 </p>
@@ -274,9 +287,9 @@ Robot Operation System (ROS) の次世代バージョンであるROS2はロボ�
 </div>
 </div>
 
-<div id="outline-container-org415516a" class="outline-3">
-<h3 id="org415516a">著者</h3>
-<div class="outline-text-3" id="text-org415516a">
+<div id="outline-container-orgef47320" class="outline-3">
+<h3 id="orgef47320">著者</h3>
+<div class="outline-text-3" id="text-orgef47320">
 <p>
 近藤豊 (こんどうゆたか、@youtalk)
 </p>
@@ -291,42 +304,203 @@ Robot Operation System (ROS) の次世代バージョンであるROS2はロボ�
 </div>
 </div>
 
-<div id="outline-container-org2f4e581" class="outline-3">
-<h3 id="org2f4e581">本書の構成</h3>
-<div class="outline-text-3" id="text-org2f4e581">
+<div id="outline-container-org1223eb8" class="outline-3">
+<h3 id="org1223eb8">本書の構成</h3>
+<div class="outline-text-3" id="text-org1223eb8">
 <p>
-誌面より
+誌面より抜粋
+</p>
+</div>
+
+<div id="outline-container-org90d2b98" class="outline-4">
+<h4 id="org90d2b98">はじめに</h4>
+<div class="outline-text-4" id="text-org90d2b98">
+<p>
+ROSの概要を紹介します。
 </p>
 
-<blockquote>
-<dl class="org-dl">
-<dt>はじめに</dt><dd>本章です。ROSの概要を紹介します。</dd>
-
-<dt>1章 ROS1ツアー</dt><dd>ROS1を知らない方、使ったことがない方に向けて、ROS1の備える機能を駆け足で紹介します。ROS1をすでに使ったことがある方は読み飛ばしていただいても結構です。</dd>
-
-<dt>2章 ROS2の開発環境セットアップ</dt><dd>ROS2の開発環境をセットアップします。OSには一番セットアップが簡単なUbuntu 18.04を採用して進めますが、ROS2はWindows 10にもmacOSにも対応しています。その他のOSへのインストールは付録をご覧ください。</dd>
-
-<dt>3章 ROS2の基本機能</dt><dd>まず、ROS1とROS2との比較を行い、なぜROS2が必要になったかを理解します。その後、ROS2が備える改善されたメッセージ通信機能を一通り紹介します。また、そのメッセージ通信を支える技術であるDDS (Data Distribution Service) 、ROS2のコマンドラインインタフェースやビルドツールについても紹介します。</dd>
-
-<dt>4章 ROS2の応用機能</dt><dd>ROS2で新たに機能追加、改善された機能を紹介します。これらの概念を理解し使いこなせるようになれば、ROS2を習得したといっても良いのではないでしょうか。</dd>
-
-<dt>5章 ROS2に対応したツール／パッケージ</dt><dd>ROS2は正式リリースから2年以上が経過したとはいえ、すべてのROS1パッケージがROS2に移行しているわけではありません。現在移行が進んでいるパッケージの中から特に大切なものを選んで紹介します。</dd>
-
-<dt>6章 Roomba用ROS1ドライバのROS2移行</dt><dd>ROS1パッケージの開発経験者は、ROS2の基本機能、応用機能、既存パッケージの存在を学んだ後、次に自分のROS1パッケージをROS2に対応させたくなるはずです。本章ではiRobotのRoomba用ROS1ドライバをROS2に対応させる移行作業を通じて、実践的なROS2プログラミングを学びます。</dd>
-
-<dt>7章 Pythonクライアントライブラリrclpy</dt><dd>本書ではソースコード例のプログラミング言語にC++14を用いています。ROS2の公式クライアントライブラリとして最も盛んにメンテナンスされているのが、C++版のクライアントライブラリ <code>rclcpp</code> だからです。それ以外のプログラミング言語の中から、本章ではスクリプト言語Python3のクライアントライブラリ <code>rclpy</code> を取り上げ、プログラミング方法を説明します。</dd>
-
-<dt>おわりに</dt><dd>本書に込めた熱い気持ちを最後にまとめました。本書を手にとって最後まで読み進んでいただいた読者の皆様と、本書を執筆するにあたってご協力いただいた様々な方々への感謝の言葉も綴っています。</dd>
-
-<dt>付録</dt><dd>本文で扱わなかったUbuntu 18.04以外のOSへのインストール手順や、サンプルコードのライセンス条項を記載します。また、3章、4章で紹介した内容よりも、さらに上級者向けのROS2プログラミング手法をご紹介します。</dd>
-</dl>
-</blockquote>
+<ul class="org-ul">
+<li>ROSとは何か</li>
+<li>ROS2はなぜできたか</li>
+<li>なぜ本書を書いたか</li>
+<li>本書の構成</li>
+<li>本書の読者</li>
+<li>前提知識</li>
+<li>オンラインリソース</li>
+</ul>
 </div>
 </div>
 
-<div id="outline-container-org9b517e4" class="outline-3">
-<h3 id="org9b517e4">書籍購入先</h3>
-<div class="outline-text-3" id="text-org9b517e4">
+<div id="outline-container-org0e347f5" class="outline-4">
+<h4 id="org0e347f5">1章 ROS1ツアー</h4>
+<div class="outline-text-4" id="text-org0e347f5">
+<p>
+ROS1を知らない方、使ったことがない方に向けて、ROS1の備える機能を駆け足で紹介します。ROS1をすでに使ったことがある方は読み飛ばしていただいても結構です。
+</p>
+
+<ul class="org-ul">
+<li>1-1 ROSの歴史</li>
+<li>1-2 ROS1の開発環境セットアップ</li>
+<li>1-3 Hello world!</li>
+<li>1-4 センシング</li>
+<li>1-5 Gazeboシミュレーション</li>
+<li>1-6 ナビゲーション</li>
+<li>1-7 マニピュレーション</li>
+<li>1-8 ROS1のない世界</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org3c25ff2" class="outline-4">
+<h4 id="org3c25ff2">2章 ROS2の開発環境セットアップ</h4>
+<div class="outline-text-4" id="text-org3c25ff2">
+<p>
+ROS2の開発環境をセットアップします。OSには一番セットアップが簡単なUbuntu 18.04を採用して進めますが、ROS2はWindows 10にもmacOSにも対応しています。その他のOSへのインストールは付録をご覧ください。
+</p>
+
+<ul class="org-ul">
+<li>2-1 Ubuntu 18.04のインストール</li>
+<li>2-2 ROS1のセットアップ無効化</li>
+<li>2-3 ROS2のインストール</li>
+<li>2-4 サンプルコードのセットアップ</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge839ef8" class="outline-4">
+<h4 id="orge839ef8">3章 ROS2の基本機能</h4>
+<div class="outline-text-4" id="text-orge839ef8">
+<p>
+まず、ROS1とROS2との比較を行い、なぜROS2が必要になったかを理解します。その後、ROS2が備える改善されたメッセージ通信機能を一通り紹介します。また、そのメッセージ通信を支える技術であるDDS (Data Distribution Service) 、ROS2のコマンドラインインタフェースやビルドツールについても紹介します。
+</p>
+
+<ul class="org-ul">
+<li>3-1 ROS1とROS2の違い</li>
+<li>3-2 ROS1との内部アーキテクチャ比較</li>
+<li>3-3 Data Distribution Service(DDS)</li>
+<li>3-4 ROS2フロントエンドツールros2</li>
+<li>3-5 ROS1/2パッケージビルドツールcolcon</li>
+<li>3-6 トピック</li>
+<li>3-7 サービス</li>
+<li>3-8 パラメータ</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8988ca2" class="outline-4">
+<h4 id="org8988ca2">4章 ROS2の応用機能</h4>
+<div class="outline-text-4" id="text-org8988ca2">
+<p>
+ROS2で新たに機能追加、改善された機能を紹介します。これらの概念を理解し使いこなせるようになれば、ROS2を習得したといっても良いのではないでしょうか。
+</p>
+
+<ul class="org-ul">
+<li>4-1 Launchシステム</li>
+<li>4-2 アクション</li>
+<li>4-3 ライフサイクル</li>
+<li>4-4 Quality of Service (QoS)</li>
+<li>4-5 DDSベンダ実装の変更</li>
+<li>4-6 セキュリティ</li>
+<li>4-7 ROS1ノードとの相互接続</li>
+<li>4-8 リアルタイム制御</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0012bf8" class="outline-4">
+<h4 id="org0012bf8">5章 ROS2に対応したツール／パッケージ</h4>
+<div class="outline-text-4" id="text-org0012bf8">
+<p>
+ROS2は正式リリースから2年以上が経過したとはいえ、すべてのROS1パッケージがROS2に移行しているわけではありません。現在移行が進んでいるパッケージの中から特に大切なものを選んで紹介します。
+</p>
+
+<ul class="org-ul">
+<li>5-1 進むROS2への対応</li>
+<li>5-2 トピック記録・再生ツールrosbag2</li>
+<li>5-3 可視化ツールrviz2</li>
+<li>5-4 RealSenseドライバros2_intel_realsense</li>
+<li>5-5 ナビゲーションパッケージnavigation2</li>
+<li>5-6 動作計画パッケージmoveit2</li>
+<li>5-7 Gazeboシミュレーション連携</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9c8394c" class="outline-4">
+<h4 id="org9c8394c">6章 Roomba用ROS1ドライバのROS2移行</h4>
+<div class="outline-text-4" id="text-org9c8394c">
+<p>
+ROS1パッケージの開発経験者は、ROS2の基本機能、応用機能、既存パッケージの存在を学んだ後、次に自分のROS1パッケージをROS2に対応させたくなるはずです。本章ではiRobotのRoomba用ROS1ドライバをROS2に対応させる移行作業を通じて、実践的なROS2プログラミングを学びます。
+</p>
+
+<ul class="org-ul">
+<li>6-1 RoombaとROSの歴史</li>
+<li>6-2 シリアル通信ケーブルの入手</li>
+<li>6-3 Roomba/Create のROS1ドライバcreate_autonomy</li>
+<li>6-4 拙作ROS2版create_autonomy</li>
+<li>6-5 package.xmlの更新</li>
+<li>6-6 メッセージ、サービス、アクション定義の更新</li>
+<li>6-7 ビルドシステムの変更</li>
+<li>6-8 ソースコードの更新</li>
+<li>6-9 まとめ</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2b119fc" class="outline-4">
+<h4 id="org2b119fc">7章 Pythonクライアントライブラリrclpy</h4>
+<div class="outline-text-4" id="text-org2b119fc">
+<p>
+本書ではソースコード例のプログラミング言語にC++14を用いています。ROS2の公式クライアントライブラリとして最も盛んにメンテナンスされているのが、C++版のクライアントライブラリ <code>rclcpp</code> だからです。それ以外のプログラミング言語の中から、本章ではスクリプト言語Python3のクライアントライブラリ <code>rclpy</code> を取り上げ、プログラミング方法を説明します。
+</p>
+
+<ul class="org-ul">
+<li>7-1 ROS2 のクライアントライブラリ</li>
+<li>7-2 パッケージ構成</li>
+<li>7-3 トピック実装</li>
+<li>7-4 サービス実装</li>
+<li>7-5 アクション実装</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org00fe810" class="outline-4">
+<h4 id="org00fe810">おわりに</h4>
+<div class="outline-text-4" id="text-org00fe810">
+<p>
+本書に込めた熱い気持ちを最後にまとめました。本書を手にとって最後まで読み進んでいただいた読者の皆様と、本書を執筆するにあたってご協力いただいた様々な方々への感謝の言葉も綴っています。
+</p>
+
+<ul class="org-ul">
+<li>ROS2 Technical Steering Committee</li>
+<li>事前アンケート</li>
+<li>本を書くということ</li>
+<li>謝辞</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9a7dac8" class="outline-4">
+<h4 id="org9a7dac8">付録</h4>
+<div class="outline-text-4" id="text-org9a7dac8">
+<p>
+本文で扱わなかったUbuntu 18.04以外のOSへのインストール手順や、サンプルコードのライセンス条項を記載します。また、3章、4章で紹介した内容よりも、さらに上級者向けのROS2プログラミング手法をご紹介します。
+</p>
+
+<ul class="org-ul">
+<li>A-1 コンポーネント指向ROS2ノードプログラミング</li>
+<li>A-2 Windows 10での開発環境セットアップ</li>
+<li>A-3 macOS Mojaveでの開発環境セットアップ</li>
+<li>A-4 サンプルコードのライセンス条項</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf868ac3" class="outline-3">
+<h3 id="orgf868ac3">書籍購入先</h3>
+<div class="outline-text-3" id="text-orgf868ac3">
 <ul class="org-ul">
 <li><a href="https://www.amazon.co.jp/dp/4297107422">Amazon</a></li>
 <li><a href="https://books.rakuten.co.jp/rb/15963562/">楽天ブックス</a></li>
@@ -338,17 +512,22 @@ Robot Operation System (ROS) の次世代バージョンであるROS2はロボ�
 </div>
 </div>
 
-<div id="outline-container-orgd08fd94" class="outline-2">
-<h2 id="orgd08fd94">正誤表</h2>
+<div id="outline-container-orgb538687" class="outline-2">
+<h2 id="orgb538687">正誤表</h2>
+<div class="outline-text-2" id="text-orgb538687">
+<p>
+TBA
+</p>
+</div>
 </div>
 
-<div id="outline-container-org691ca6f" class="outline-2">
-<h2 id="org691ca6f">サンプルコードのセットアップ</h2>
-<div class="outline-text-2" id="text-org691ca6f">
+<div id="outline-container-orga9e5283" class="outline-2">
+<h2 id="orga9e5283">サンプルコードのセットアップ</h2>
+<div class="outline-text-2" id="text-orga9e5283">
 </div>
-<div id="outline-container-orga528886" class="outline-3">
-<h3 id="orga528886">1章 ROS1ツアー</h3>
-<div class="outline-text-3" id="text-orga528886">
+<div id="outline-container-org6623376" class="outline-3">
+<h3 id="org6623376">1章 ROS1ツアー</h3>
+<div class="outline-text-3" id="text-org6623376">
 <p>
 誌面より
 </p>
@@ -387,9 +566,9 @@ $ catkin source
 </div>
 </div>
 
-<div id="outline-container-orgbe54d71" class="outline-3">
-<h3 id="orgbe54d71">2章 ROS2の開発環境セットアップ</h3>
-<div class="outline-text-3" id="text-orgbe54d71">
+<div id="outline-container-org9e55b88" class="outline-3">
+<h3 id="org9e55b88">2章 ROS2の開発環境セットアップ</h3>
+<div class="outline-text-3" id="text-org9e55b88">
 <p>
 誌面より
 </p>
@@ -423,14 +602,13 @@ $ colcon build
 $ . ~/ros2/install/setup.bash
 </pre>
 </div>
-
-<p>
-<code>colcon</code> コマンドは、ROSパッケージのビルドツールです。次章で解説します。
-</p>
 </blockquote>
 </div>
 </div>
 </div>
+</div>
+<div id="postamble" class="status">
+<p class="validation"></p>
 </div>
 </body>
 </html>
