@@ -4,7 +4,7 @@ title: オンラインリソース
 ---
 
 <center>
-    <img src="/get-started-ros2/img/cover.png" width="400">
+    <img src="/img/cover.png" width="400">
 </center>
 
 ## 内容紹介
