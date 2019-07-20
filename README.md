@@ -1,9 +1,11 @@
 ---
 layout: page
-title: 書籍「ROS2ではじめよう 次世代ロボットプログラミング」オンラインリソース
+title: オンラインリソース
 ---
 
-<img src="/img/cover.png" width="400">
+<center>
+    <img src="/img/cover.png" width="400">
+</center>
 
 ## 内容紹介
 
