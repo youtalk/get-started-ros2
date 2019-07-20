@@ -18,7 +18,7 @@ email: yutaka.kondo@youtalk.jp
 description: >-
   本書は今後のロボットアプリケーション開発のデファクトスタンダードになるROS2の入門書です。基本操作から、ROS1の資産を活用するための接続方法、パッケージの開発方法までを網羅します。これからロボット開発をはじめたいと考える方だけでなく、ROS1ユーザにとっても有用な1冊です。
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://www.youtalk.jp"
+url: "https://www.youtalk.jp/get-started-ros2"
 twitter_username: youtalk
 facebook_username: yutaka.kondo
 linkedin_username: youtalk
