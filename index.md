@@ -13,13 +13,37 @@ Robot Operation System (ROS) の次世代バージョンであるROS2はロボ�
 
 本書は今後のロボットアプリケーション開発のデファクトスタンダードになるROS2の入門書です。基本操作から、ROS1の資産を活用するための接続方法、パッケージの開発方法までを網羅します。本書のサンプルコードはC++ですが、それ以外のプログラミング言語を用いたクライアントライブラリについても解説します。ROS1ではUbuntuのみで利用できましたが、ROS2からはWindows、macOSで利用できるようになり、さらに利用者が増えると見込まれています。主なOSの開発環境のセットアップについても解説します。これからロボット開発をはじめたいと考える方だけでなく、ROS1ユーザにとっても有用な1冊です。
 
-## 著者
+## プロフィール
 
-近藤豊 (こんどうゆたか、@youtalk)
+### 執筆者
+
+近藤 豊 (こんどう ゆたか、 `@youtalk` )
 
 株式会社Preferred Networks エンジニア。ROS Japan Users Group を主宰。奈良先端科学技術大学院大学 情報科学研究科 博士後期課程 修了 博士 (工学)。
 
 [https://www.youtalk.jp](https://www.youtalk.jp)
+
+### 編集協力者
+
+- Geoffrey Biggs（ジェフ・ビグス）さん
+- 高妻 真吾さん
+
+### 出版社
+
+[技術評論社](https://gihyo.jp/book)
+
+## 書籍購入先
+
+- [Amazon](https://www.amazon.co.jp/dp/4297107422)
+- [楽天ブックス](https://books.rakuten.co.jp/rb/15963562/)
+- [honto](https://honto.jp/netstore/pd-book_29745146.html)
+- [HMV&BOOKS online](https://www.hmv.co.jp/artist_近藤豊_000000000722015/item_ROS2ではじめよう-次世代ロボットプログラミング_9996608)
+- [ヨドバシ.com](https://www.yodobashi.com/product/100000009003160906/)
+
+## ハッシュタグ
+
+Twitter、Facebookなど、SNSに本書に関する投稿をする際に、ハッシュタグ `#ROS2ではじめよう` を付けていただけると著者が反応できるかもしれません。
+感想、疑問、応援、そのほか内容は何でも結構です。
 
 ## 本書の構成
 
@@ -137,11 +161,3 @@ ROS1パッケージの開発経験者は、ROS2の基本機能、応用機能、
 - A-2 Windows 10での開発環境セットアップ
 - A-3 macOS Mojaveでの開発環境セットアップ
 - A-4 サンプルコードのライセンス条項
-
-## 書籍購入先
-
-- [Amazon](https://www.amazon.co.jp/dp/4297107422)
-- [楽天ブックス](https://books.rakuten.co.jp/rb/15963562/)
-- [honto](https://honto.jp/netstore/pd-book_29745146.html)
-- [HMV&BOOKS online](https://www.hmv.co.jp/artist_近藤豊_000000000722015/item_ROS2ではじめよう-次世代ロボットプログラミング_9996608)
-- [ヨドバシ.com](https://www.yodobashi.com/product/100000009003160906/)
