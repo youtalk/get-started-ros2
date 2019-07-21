@@ -9,7 +9,7 @@ title: オンラインリソース
 
 誌面より
 
-> 次項からステップバイステップで実装していくROS1デモパッケージ ~hello_world~ のソースコードはオンラインリソース
+> 次項からステップバイステップで実装していくROS1デモパッケージ `hello_world` のソースコードはオンラインリソース
 >
 > [https://github.com/youtalk/get-started-ros2/tree/release/ros1/hello_world](https://github.com/youtalk/get-started-ros2/tree/release/ros1/hello_world)
 >
@@ -34,7 +34,7 @@ title: オンラインリソース
 
 誌面より
 
-> 次章からステップバイステップで実装していくROS2デモパッケージ ~hello_world~ および、4章、7章で使用するパッケージのソースコードはオンラインリソース
+> 次章からステップバイステップで実装していくROS2デモパッケージ `hello_world` および、4章、7章で使用するパッケージのソースコードはオンラインリソース
 >
 > [https://github.com/youtalk/get-started-ros2/tree/release/ros2](https://github.com/youtalk/get-started-ros2/tree/release/ros2)
 >
