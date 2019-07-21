@@ -17,7 +17,7 @@ Robot Operation System (ROS) の次世代バージョンであるROS2はロボ�
 
 ### 執筆者
 
-近藤豊 (こんどうゆたか、 `@youtalk` )
+近藤 豊 (こんどう ゆたか、 `@youtalk` )
 
 株式会社Preferred Networks エンジニア。ROS Japan Users Group を主宰。奈良先端科学技術大学院大学 情報科学研究科 博士後期課程 修了 博士 (工学)。
 
