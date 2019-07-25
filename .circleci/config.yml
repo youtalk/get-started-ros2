@@ -8,14 +8,18 @@ jobs:
       - run:
           name: Set Up Container
           command: |
+            pwd
+            ls
             apt-get update -qq
             source /opt/ros/dashing/setup.bash
             mkdir ~/ros
-            ln -s ros2 ~/ros/src
+            ln -s ~/project/ros2 ~/ros/src
             cd ~/ros
             rosdep install --from-paths . --ignore-src -y
       - run:
           name: Build
           command: |
             cd ~/ros
+            pwd
+            ls
             colcon build
