@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  dashing:
     docker:
       - image: ros:dashing
     steps:
@@ -20,3 +20,9 @@ jobs:
             source /opt/ros/dashing/setup.bash
             cd ~/ros
             colcon build
+
+workflows:
+  version: 2
+  ros_build:
+    jobs:
+      - dashing
