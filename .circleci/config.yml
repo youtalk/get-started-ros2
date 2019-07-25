@@ -21,8 +21,31 @@ jobs:
             cd ~/ros
             colcon build
 
+  melodic:
+    docker:
+      - image: ros:melodic
+    steps:
+      - checkout
+      - run:
+          name: Set Up Container
+          command: |
+            apt-get update -qq
+            apt-get install -y python-catkin-tools
+            source /opt/ros/melodic/setup.bash
+            mkdir ~/ros
+            ln -s ~/project/ros1 ~/ros/src
+            cd ~/ros
+            rosdep install --from-paths . --ignore-src -y
+      - run:
+          name: Build
+          command: |
+            source /opt/ros/melodic/setup.bash
+            cd ~/ros
+            catkin build
+
 workflows:
   version: 2
   ros_build:
     jobs:
       - dashing
+      - melodic
