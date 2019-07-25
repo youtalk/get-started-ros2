@@ -17,4 +17,5 @@ jobs:
       - run:
           name: Build
           command: |
+            cd ~/ros
             colcon build
