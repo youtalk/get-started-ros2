@@ -8,8 +8,6 @@ jobs:
       - run:
           name: Set Up Container
           command: |
-            pwd
-            ls
             apt-get update -qq
             source /opt/ros/dashing/setup.bash
             mkdir ~/ros
@@ -19,7 +17,6 @@ jobs:
       - run:
           name: Build
           command: |
+            source /opt/ros/dashing/setup.bash
             cd ~/ros
-            pwd
-            ls
             colcon build
