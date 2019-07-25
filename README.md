@@ -9,6 +9,8 @@ title: オンラインリソース
 
 [https://github.com/youtalk/get-started-ros2](https://github.com/youtalk/get-started-ros2)
 
+[![CircleCI](https://circleci.com/gh/youtalk/get-started-ros2.svg?style=svg)](https://circleci.com/gh/youtalk/get-started-ros2)
+
 ## セットアップ
 
 ### 1章 ROS1ツアー
