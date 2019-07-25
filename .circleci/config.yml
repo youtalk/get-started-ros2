@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ros:dashing
+    steps:
+      - checkout
+      - run:
+          name: Set Up Container
+          command: |
+            apt-get update -qq
+            source /opt/ros/dashing/setup.bash
+            ln -s ros2 ~/ros/src
+            cd ~/ros
+            rosdep install --from-paths . --ignore-src -y
+      - run:
+          name: Build
+          command: |
+            colcon build
+    working_directory: ~/ros
