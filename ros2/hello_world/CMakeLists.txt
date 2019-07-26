@@ -35,8 +35,8 @@ custom_executable(set_and_get_parameters)
 
 include_directories(include)
 
-# 共有ライブラリの生成
 if($ENV{ROS_DISTRO} STREQUAL dashing)
+  # 共有ライブラリの生成
   add_library(talker_component SHARED
     src/talker_component.cpp)
   target_compile_definitions(talker_component
