@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Test
           command: |
-            source /opt/ros/dashing/setup.bash
+            source /opt/ros/crystal/setup.bash
             cd ~/ros
             colcon test
             colcon test-result --all
