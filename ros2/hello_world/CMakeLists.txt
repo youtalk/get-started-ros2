@@ -67,6 +67,11 @@ if($ENV{ROS_DISTRO} STREQUAL dashing)
     "hello_world::ListenerComponent")
 endif()
 
+if(BUILD_TESTING)
+  find_package(ament_cmake_pytest REQUIRED)
+  set(TEST_LAUNCH_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test)
+endif()
+
 install(DIRECTORY
     launch
     DESTINATION share/${PROJECT_NAME}/
