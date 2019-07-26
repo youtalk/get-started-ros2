@@ -21,6 +21,27 @@ jobs:
             cd ~/ros
             colcon build
 
+  crystal:
+    docker:
+      - image: ros:crystal
+    steps:
+      - checkout
+      - run:
+          name: Set Up Container
+          command: |
+            apt-get update -qq
+            source /opt/ros/crystal/setup.bash
+            mkdir ~/ros
+            ln -s ~/project/ros2 ~/ros/src
+            cd ~/ros
+            rosdep install --from-paths . --ignore-src -y
+      - run:
+          name: Build
+          command: |
+            source /opt/ros/crystal/setup.bash
+            cd ~/ros
+            colcon build
+
   melodic:
     docker:
       - image: ros:melodic
@@ -48,4 +69,5 @@ workflows:
   ros_build:
     jobs:
       - dashing
+      - crystal
       - melodic

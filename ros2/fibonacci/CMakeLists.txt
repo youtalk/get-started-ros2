@@ -20,9 +20,11 @@ function(custom_executable target)
     DESTINATION lib/${PROJECT_NAME})
 endfunction()
 
-# action_serverノードのビルド設定
-custom_executable(action_server)
-# action_clientノードのビルド設定
-custom_executable(action_client)
+if($ENV{ROS_DISTRO} STREQUAL dashing)
+  # action_serverノードのビルド設定
+  custom_executable(action_server)
+  # action_clientノードのビルド設定
+  custom_executable(action_client)
+endif()
 
 ament_package()
