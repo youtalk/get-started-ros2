@@ -30,8 +30,10 @@ custom_executable(listener)
 custom_executable(client_async)
 # talker/listenerノードのプロセス間通信のビルド設定
 custom_executable(talker_listener_composition)
-# パラメータ取得・設定ノードのビルド設定
-custom_executable(set_and_get_parameters)
+if($ENV{ROS_DISTRO} STREQUAL dashing)
+  # パラメータ取得・設定ノードのビルド設定
+  custom_executable(set_and_get_parameters)
+endif()
 
 include_directories(include)
 
