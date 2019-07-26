@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set Up Container
+          name: Set up
           command: |
             apt-get update -qq
             source /opt/ros/dashing/setup.bash
@@ -20,6 +20,13 @@ jobs:
             source /opt/ros/dashing/setup.bash
             cd ~/ros
             colcon build
+      - run:
+          name: Test
+          command: |
+            source /opt/ros/dashing/setup.bash
+            cd ~/ros
+            colcon test
+            colcon test-result --all
 
   crystal:
     docker:
@@ -27,7 +34,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set Up Container
+          name: Set up
           command: |
             apt-get update -qq
             source /opt/ros/crystal/setup.bash
@@ -41,6 +48,13 @@ jobs:
             source /opt/ros/crystal/setup.bash
             cd ~/ros
             colcon build
+      - run:
+          name: Test
+          command: |
+            source /opt/ros/dashing/setup.bash
+            cd ~/ros
+            colcon test
+            colcon test-result --all
 
   melodic:
     docker:
@@ -48,7 +62,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set Up Container
+          name: Set up
           command: |
             apt-get update -qq
             apt-get install -y python-catkin-tools
