@@ -23,7 +23,9 @@ endfunction()
 # talkerノードのビルド設定
 custom_executable(talker)
 custom_executable(talker_with_service)
-custom_executable(talker_with_service_param)
+if($ENV{ROS_DISTRO} STREQUAL dashing)
+  custom_executable(talker_with_service_param)
+endif()
 # listenerノードのビルド設定
 custom_executable(listener)
 # client_asyncノードのビルド設定
