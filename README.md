@@ -9,6 +9,12 @@ title: オンラインリソース
 
 [https://github.com/youtalk/get-started-ros2](https://github.com/youtalk/get-started-ros2)
 
+サンプルコードの動作確認は、以下のROSディストリビューションで行なっております。
+
+- ROS 2 Dashing Diademata
+- ROS 2 Crystal Clemmys
+- ROS 1 Melodic Morenia
+
 [![CircleCI](https://circleci.com/gh/youtalk/get-started-ros2.svg?style=svg)](https://circleci.com/gh/youtalk/get-started-ros2)
 
 ## セットアップ
