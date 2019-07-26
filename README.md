@@ -12,7 +12,7 @@ title: オンラインリソース
 サンプルコードの動作確認は、以下のROSディストリビューションで行なっております。
 
 - ROS 2 Dashing Diademata
-- ROS 2 Crystal Clemmys
+- ROS 2 Crystal Clemmys（一部ビルド省略）
 - ROS 1 Melodic Morenia
 
 [![CircleCI](https://circleci.com/gh/youtalk/get-started-ros2.svg?style=svg)](https://circleci.com/gh/youtalk/get-started-ros2)
