@@ -68,8 +68,8 @@ if($ENV{ROS_DISTRO} STREQUAL dashing)
 endif()
 
 if(BUILD_TESTING)
-  find_package(ament_cmake_pytest REQUIRED)
-  set(TEST_LAUNCH_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
 endif()
 
 install(DIRECTORY
