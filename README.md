@@ -5,7 +5,7 @@ title: オンラインリソース
 
 ## サンプルコード
 
-本書のサンプルコードは以下のGitHubレポジトリで管理されています。Apache License 2.0の下、ご自由にお使いください。sa
+本書のサンプルコードは以下のGitHubレポジトリで管理されています。Apache License 2.0の下、ご自由にお使いください。
 
 [https://github.com/youtalk/get-started-ros2](https://github.com/youtalk/get-started-ros2)
 
