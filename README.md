@@ -15,7 +15,7 @@ title: オンラインリソース
 - ROS 2 Crystal Clemmys（一部ビルド省略）
 - ROS 1 Melodic Morenia
 
-サンプルコードは紙面の文字数制限の都合上、行に72文字以内で記述しています。 `ament_uncrustify` のルールとは合致しない点、ご留意ください。　
+サンプルコードは紙面の文字数制限の都合上、1行あたり72文字以内で記述しています。ROS2公式の `ament_uncrustify` の整形ルールとは合致しない点、ご留意ください。　
 
 [![CircleCI](https://circleci.com/gh/youtalk/get-started-ros2.svg?style=svg)](https://circleci.com/gh/youtalk/get-started-ros2)
 
