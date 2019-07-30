@@ -5,7 +5,7 @@ title: オンラインリソース
 
 ## サンプルコード
 
-本書のサンプルコードは以下のGitHubレポジトリで管理されています。Apache License 2.0の下、ご自由にお使いください。
+本書のサンプルコードは以下のGitHubレポジトリで管理されています。Apache License 2.0の下、ご自由にお使いください。sa
 
 [https://github.com/youtalk/get-started-ros2](https://github.com/youtalk/get-started-ros2)
 
@@ -14,6 +14,8 @@ title: オンラインリソース
 - ROS 2 Dashing Diademata
 - ROS 2 Crystal Clemmys（一部ビルド省略）
 - ROS 1 Melodic Morenia
+
+サンプルコードは紙面の文字数制限の都合上、行に72文字以内で記述しています。 `ament_uncrustify` のルールとは合致しない点、ご留意ください。　
 
 [![CircleCI](https://circleci.com/gh/youtalk/get-started-ros2.svg?style=svg)](https://circleci.com/gh/youtalk/get-started-ros2)
 
