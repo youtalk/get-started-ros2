@@ -30,7 +30,7 @@ Robot Operation System (ROS) の次世代バージョンであるROS2はロボ�
 
 ### 出版社
 
-[技術評論社](https://gihyo.jp/book)
+[技術評論社](https://gihyo.jp/book/2019/978-4-297-10742-0)
 
 ## 書籍購入先
 
