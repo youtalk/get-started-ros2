@@ -4,3 +4,6 @@
 [submodule "ros2/create_autonomy"]
 	path = ros2/create_autonomy
 	url = https://github.com/youtalk/create_autonomy.git
+[submodule "ros2/libcreate"]
+	path = ros2/libcreate
+	url = https://github.com/AutonomyLab/libcreate.git
