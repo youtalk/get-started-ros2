@@ -28,6 +28,8 @@ if($ENV{ROS_DISTRO} STREQUAL dashing)
 endif()
 # listenerノードのビルド設定
 custom_executable(listener)
+# client_syncノードのビルド設定
+custom_executable(client_sync)
 # client_asyncノードのビルド設定
 custom_executable(client_async)
 # talker/listenerノードのプロセス間通信のビルド設定
