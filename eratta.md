@@ -13,6 +13,7 @@ title: 正誤表
 |----------------|---------------------------------------------------|-----------------------------------------------------------|
 | P. iii 1行目   | Robot Operation System                            | Robot Operating System                                    |
 | P. xi 1行目    | ROSCon Japan                                      | ROSCon JP                                                 |
+| P. 46, 47      | python3-rosdep                                    | python-rosdep                                             |
 | P. 55 18行目   | 熟成している                                      | 成熟している                                              |
 | P. 57 図3-2    | rmv                                               | rmw                                                       |
 | P. 57 図3-2    | DOS ベンダ                                        | DDS ベンダ                                                |
