@@ -18,5 +18,5 @@ title: 正誤表
 | P. 57 図3-2              | rmv                                               | rmw                                                       |
 | P. 57 図3-2              | DOS ベンダ                                        | DDS ベンダ                                                |
 | P. 69 15行目             | https://github.com/ros2/ros2/wiki/Colcon-Tutorial | https://index.ros.org/doc/ros2/Tutorials/Colcon-Tutorial/ |
-| P. 73 ソースコード14行目 | ament_target_dependencies(${target} "rclcpp")     | ament_target_dependencies(${target} "rclcpp" "std_msgs")  |
+| P. 73 ソースコード14行目 | ament_target_dependencies(${target} "rclcpp")     | ament_target_dependencies(${target} "rclcpp" "hello_world_msgs")  |
 | P. 81 5行目              | サーバー                                          | サーバ                                                    |
