@@ -89,6 +89,6 @@ workflows:
   version: 2
   ros_build:
     jobs:
+      - eloquent
       - dashing
-      - crystal
       - melodic
