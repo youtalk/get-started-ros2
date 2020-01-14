@@ -42,11 +42,11 @@ public:
       [this]() -> void  // ラムダ式による関数オブジェクトの定義
       {
         // 送信するメッセージ
-        msg_ = std::make_unique<std_msgs::msg::String>();
-        msg_->data = "Hello World!";
+        auto msg = std::make_unique<std_msgs::msg::String>();
+        msg->data = "Hello World!";
 
-        RCLCPP_INFO(this->get_logger(), "%s", msg_->data.c_str());
-        pub_->publish(std::move(msg_));
+        RCLCPP_INFO(this->get_logger(), "%s", msg->data.c_str());
+        pub_->publish(std::move(msg));
       };
 
     // chatterトピックの送信設定
@@ -57,7 +57,6 @@ public:
   }
 
 private:
-  std::unique_ptr<std_msgs::msg::String> msg_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
 };

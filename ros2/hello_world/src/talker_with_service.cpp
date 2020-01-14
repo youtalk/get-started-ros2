@@ -35,11 +35,11 @@ public:
     auto publish_message =
       [this]() -> void
       {
-        msg_ = std::make_unique<std_msgs::msg::String>();
-        msg_->data = data_;
+        auto msg = std::make_unique<std_msgs::msg::String>();
+        msg->data = data_;
 
-        RCLCPP_INFO(this->get_logger(), "%s", msg_->data.c_str());
-        pub_->publish(std::move(msg_));
+        RCLCPP_INFO(this->get_logger(), "%s", msg->data.c_str());
+        pub_->publish(std::move(msg));
       };
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
@@ -67,7 +67,6 @@ public:
   }
 
 private:
-  std::unique_ptr<std_msgs::msg::String> msg_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Service<SetMessage>::SharedPtr srv_;
