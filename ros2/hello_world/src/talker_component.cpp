@@ -57,7 +57,7 @@ public:
   }
 
 private:
-  std::shared_ptr<std_msgs::msg::String> msg_;
+  std::unique_ptr<std_msgs::msg::String> msg_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
 };
