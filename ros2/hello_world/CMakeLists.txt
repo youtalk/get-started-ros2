@@ -5,9 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-if($ENV{ROS_DISTRO} STREQUAL dashing)
-  find_package(rclcpp_components REQUIRED)
-endif()
+find_package(rclcpp_components REQUIRED)
 find_package(hello_world_msgs REQUIRED)
 
 # ビルド設定の便利関数
@@ -23,9 +21,7 @@ endfunction()
 # talkerノードのビルド設定
 custom_executable(talker)
 custom_executable(talker_with_service)
-if($ENV{ROS_DISTRO} STREQUAL dashing)
-  custom_executable(talker_with_service_param)
-endif()
+custom_executable(talker_with_service_param)
 # listenerノードのビルド設定
 custom_executable(listener)
 # client_syncノードのビルド設定
@@ -34,14 +30,12 @@ custom_executable(client_sync)
 custom_executable(client_async)
 # talker/listenerノードのプロセス間通信のビルド設定
 custom_executable(talker_listener_composition)
-if($ENV{ROS_DISTRO} STREQUAL dashing)
-  # パラメータ取得・設定ノードのビルド設定
-  custom_executable(set_and_get_parameters)
-endif()
+# パラメータ取得・設定ノードのビルド設定
+custom_executable(set_and_get_parameters)
 
 include_directories(include)
 
-if($ENV{ROS_DISTRO} STREQUAL dashing)
+if($ENV{ROS_DISTRO} STREQUAL dashing OR $ENV{ROS_DISTRO} STREQUAL eloquent)
   # 共有ライブラリの生成
   add_library(talker_component SHARED
     src/talker_component.cpp)
