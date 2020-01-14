@@ -32,8 +32,9 @@ public:
       };
 
     // chatterトピックの受信設定
+    rclcpp::QoS qos(rclcpp::KeepLast(10));
     sub_ = create_subscription<std_msgs::msg::String>(
-      topic_name, 10, callback);
+      topic_name, qos, callback);
   }
 
 private:

@@ -39,8 +39,9 @@ public:
       };
 
     // chatterトピックの受信設定
+    rclcpp::QoS qos(rclcpp::KeepLast(10));
     sub_ = create_subscription<std_msgs::msg::String>(
-      "chatter", 10, callback);
+      "chatter", qos, callback);
   }
 
 private:
