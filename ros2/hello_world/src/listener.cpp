@@ -26,14 +26,14 @@ public:
   {
     // chatterトピックのコールバック関数
     auto callback =
-      [this](const std_msgs::msg::String::SharedPtr msg) -> void
+      [this](const std_msgs::msg::String::UniquePtr msg) -> void
       {
         RCLCPP_INFO(this->get_logger(), "%s", msg->data.c_str());
       };
 
     // chatterトピックの受信設定
     sub_ = create_subscription<std_msgs::msg::String>(
-      topic_name, callback);
+      topic_name, 10, callback);
   }
 
 private:

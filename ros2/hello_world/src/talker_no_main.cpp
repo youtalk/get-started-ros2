@@ -27,26 +27,27 @@ public:
   explicit Talker(const std::string & topic_name)
   : Node("talker")
   {
-    // 送信するメッセージ
-    msg_ = std::make_shared<std_msgs::msg::String>();
-    msg_->data = "Hello world!";
-
     // タイマー実行されるイベントハンドラー関数
     auto publish_message =
       [this]() -> void  // ラムダ式による関数オブジェクトの定義
       {
+        // 送信するメッセージ
+        msg_ = std::make_unique<std_msgs::msg::String>();
+        msg_->data = "Hello world!";
+
         RCLCPP_INFO(this->get_logger(), "%s", msg_->data.c_str());
-        pub_->publish(msg_);
+        pub_->publish(std::move(msg_));
       };
 
     // chatterトピックの送信設定
-    pub_ = create_publisher<std_msgs::msg::String>(topic_name);
+    rclcpp::QoS qos(rclcpp::KeepLast(10));
+    pub_ = create_publisher<std_msgs::msg::String>(topic_name, qos);
     // publish_messageの100ミリ秒周期でのタイマー実行
     timer_ = create_wall_timer(100ms, publish_message);
   }
 
 private:
-  std::shared_ptr<std_msgs::msg::String> msg_;
+  std::unique_ptr<std_msgs::msg::String> msg_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
 };

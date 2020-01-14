@@ -29,19 +29,21 @@ class Talker : public rclcpp::Node
 {
 public:
   explicit Talker(const std::string & topic_name)
-  : Node("talker")
+  : Node("talker"),
+    data_("Hello world!")
   {
-    msg_ = std::make_shared<std_msgs::msg::String>();
-    msg_->data = "Hello world!";
-
     auto publish_message =
       [this]() -> void
       {
-        RCLCPP_INFO(this->get_logger(), "%s", msg_->data.c_str());
-        pub_->publish(msg_);
+        auto msg = std::make_unique<std_msgs::msg::String>();
+        msg->data = data_;
+
+        RCLCPP_INFO(this->get_logger(), "%s", msg->data.c_str());
+        pub_->publish(std::move(msg));
       };
 
-    pub_ = create_publisher<std_msgs::msg::String>(topic_name);
+    rclcpp::QoS qos(rclcpp::KeepLast(10));
+    pub_ = create_publisher<std_msgs::msg::String>(topic_name, qos);
     timer_ = create_wall_timer(100ms, publish_message);
 
     // set_messageサービスのコールバック関数
@@ -52,10 +54,10 @@ public:
       {
         (void)request_header;  // Lintツール対策
         RCLCPP_INFO(this->get_logger(), "message %s -> %s",
-                    this->msg_->data.c_str(), request->message.c_str());
+                    this->data_.c_str(), request->message.c_str());
         // 1秒スリープ（重い処理の代わり）
         std::this_thread::sleep_for(1s);
-        this->msg_->data = request->message;
+        this->data_ = request->message;
         response->result = true;
       };
 
@@ -65,10 +67,10 @@ public:
   }
 
 private:
-  std::shared_ptr<std_msgs::msg::String> msg_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Service<SetMessage>::SharedPtr srv_;
+  std::string data_;
 };
 
 int main(int argc, char * argv[])
