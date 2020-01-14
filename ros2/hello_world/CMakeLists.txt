@@ -35,33 +35,31 @@ custom_executable(set_and_get_parameters)
 
 include_directories(include)
 
-if($ENV{ROS_DISTRO} STREQUAL dashing OR $ENV{ROS_DISTRO} STREQUAL eloquent)
-  # 共有ライブラリの生成
-  add_library(talker_component SHARED
-    src/talker_component.cpp)
-  target_compile_definitions(talker_component
-    PRIVATE "COMPOSITION_BUILDING_DLL")
-  ament_target_dependencies(talker_component
-    "rclcpp"
-    "rclcpp_components"
-    "hello_world_msgs")
-  # クラスローダーへの共有ライブラリの登録
-  rclcpp_components_register_nodes(talker_component
-    "hell_world::TalkerComponent")
+# 共有ライブラリの生成
+add_library(talker_component SHARED
+  src/talker_component.cpp)
+target_compile_definitions(talker_component
+  PRIVATE "COMPOSITION_BUILDING_DLL")
+ament_target_dependencies(talker_component
+  "rclcpp"
+  "rclcpp_components"
+  "hello_world_msgs")
+# クラスローダーへの共有ライブラリの登録
+rclcpp_components_register_nodes(talker_component
+  "hell_world::TalkerComponent")
 
-  # 共有ライブラリの生成
-  add_library(listener_component SHARED
-    src/listener_component.cpp)
-  target_compile_definitions(listener_component
-    PRIVATE "COMPOSITION_BUILDING_DLL")
-  ament_target_dependencies(listener_component
-    "rclcpp"
-    "rclcpp_components"
-    "hello_world_msgs")
-  # クラスローダーへの共有ライブラリの登録
-  rclcpp_components_register_nodes(listener_component
-    "hello_world::ListenerComponent")
-endif()
+# 共有ライブラリの生成
+add_library(listener_component SHARED
+  src/listener_component.cpp)
+target_compile_definitions(listener_component
+  PRIVATE "COMPOSITION_BUILDING_DLL")
+ament_target_dependencies(listener_component
+  "rclcpp"
+  "rclcpp_components"
+  "hello_world_msgs")
+# クラスローダーへの共有ライブラリの登録
+rclcpp_components_register_nodes(listener_component
+  "hello_world::ListenerComponent")
 
 install(DIRECTORY
     launch
