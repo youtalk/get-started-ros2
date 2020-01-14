@@ -29,13 +29,14 @@ class Talker : public rclcpp::Node
 {
 public:
   explicit Talker(const std::string & topic_name)
-  : Node("talker")
+  : Node("talker"),
+    data_("Hello world!")
   {
     auto publish_message =
       [this]() -> void
       {
         msg_ = std::make_unique<std_msgs::msg::String>();
-        msg_->data = "Hello world!";
+        msg_->data = data_;
 
         RCLCPP_INFO(this->get_logger(), "%s", msg_->data.c_str());
         pub_->publish(std::move(msg_));
@@ -53,10 +54,10 @@ public:
       {
         (void)request_header;  // Lintツール対策
         RCLCPP_INFO(this->get_logger(), "message %s -> %s",
-                    this->msg_->data.c_str(), request->message.c_str());
+                    this->data_.c_str(), request->message.c_str());
         // 1秒スリープ（重い処理の代わり）
         std::this_thread::sleep_for(1s);
-        this->msg_->data = request->message;
+        this->data_ = request->message;
         response->result = true;
       };
 
@@ -70,6 +71,7 @@ private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Service<SetMessage>::SharedPtr srv_;
+  std::string data_;
 };
 
 int main(int argc, char * argv[])

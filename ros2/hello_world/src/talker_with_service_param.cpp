@@ -28,14 +28,15 @@ class Talker : public rclcpp::Node
 {
 public:
   explicit Talker(const std::string & topic_name)
-  : Node("talker")
+  : Node("talker"),
+    data_("Hello world!")
   {
-    msg_ = std::make_unique<std_msgs::msg::String>();
-    msg_->data = "Hello world!";
-
     auto publish_message =
       [this]() -> void
       {
+        msg_ = std::make_unique<std_msgs::msg::String>();
+        msg_->data = data_;
+
         // decorationによる文字列の装飾
         std::string decorated_data = decoration_ + msg_->data + decoration_;
         RCLCPP_INFO(this->get_logger(), "%s", decorated_data.c_str());
@@ -53,8 +54,8 @@ public:
       {
         (void)request_header;
         RCLCPP_INFO(this->get_logger(), "message %s -> %s",
-                    this->msg_->data.c_str(), request->message.c_str());
-        this->msg_->data = request->message;
+                    this->data_.c_str(), request->message.c_str());
+        this->data_ = request->message;
         response->result = true;
       };
 
@@ -89,6 +90,7 @@ private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Service<SetMessage>::SharedPtr srv_;
+  std::string data_;
   std::string decoration_;
 };
 
