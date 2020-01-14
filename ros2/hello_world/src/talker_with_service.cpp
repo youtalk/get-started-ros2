@@ -31,17 +31,18 @@ public:
   explicit Talker(const std::string & topic_name)
   : Node("talker")
   {
-    msg_ = std::make_shared<std_msgs::msg::String>();
-    msg_->data = "Hello world!";
-
     auto publish_message =
       [this]() -> void
       {
+        msg_ = std::make_unique<std_msgs::msg::String>();
+        msg_->data = "Hello world!";
+
         RCLCPP_INFO(this->get_logger(), "%s", msg_->data.c_str());
-        pub_->publish(msg_);
+        pub_->publish(std::move(msg_));
       };
 
-    pub_ = create_publisher<std_msgs::msg::String>(topic_name);
+    rclcpp::QoS qos(rclcpp::KeepLast(10));
+    pub_ = create_publisher<std_msgs::msg::String>(topic_name, qos);
     timer_ = create_wall_timer(100ms, publish_message);
 
     // set_messageサービスのコールバック関数
@@ -65,7 +66,7 @@ public:
   }
 
 private:
-  std::shared_ptr<std_msgs::msg::String> msg_;
+  std::unique_ptr<std_msgs::msg::String> msg_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Service<SetMessage>::SharedPtr srv_;
