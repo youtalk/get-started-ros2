@@ -46,7 +46,7 @@ ament_target_dependencies(talker_component
   "hello_world_msgs")
 # クラスローダーへの共有ライブラリの登録
 rclcpp_components_register_nodes(talker_component
-  "hell_world::TalkerComponent")
+  "hello_world::TalkerComponent")
 
 # 共有ライブラリの生成
 add_library(listener_component SHARED
