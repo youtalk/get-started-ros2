@@ -1,5 +1,26 @@
 version: 2
 jobs:
+  foxy:
+    docker:
+      - image: ros:foxy
+    steps:
+      - checkout
+      - run:
+          name: Set Up Container
+          command: |
+            apt-get update -qq
+            source /opt/ros/foxy/setup.bash
+            mkdir ~/ros
+            ln -s ~/project/ros2 ~/ros/src
+            cd ~/ros
+            rosdep install --from-paths . --ignore-src -y
+      - run:
+          name: Build
+          command: |
+            source /opt/ros/foxy/setup.bash
+            cd ~/ros
+            colcon build
+
   eloquent:
     docker:
       - image: ros:eloquent
@@ -63,6 +84,26 @@ jobs:
             cd ~/ros
             colcon build
 
+  noetic:
+    docker:
+      - image: ros:noetic
+    steps:
+      - checkout
+      - run:
+          name: Set Up Container
+          command: |
+            source /opt/ros/noetic/setup.bash
+            mkdir ~/ros
+            ln -s ~/project/ros1 ~/ros/src
+            cd ~/ros
+            rosdep install --from-paths . --ignore-src -y
+      - run:
+          name: Build
+          command: |
+            source /opt/ros/noetic/setup.bash
+            cd ~/ros
+            catkin_make
+
   melodic:
     docker:
       - image: ros:melodic
@@ -89,6 +130,8 @@ workflows:
   version: 2
   ros_build:
     jobs:
+      - foxy
       - eloquent
       - dashing
+      - noetic
       - melodic
