@@ -1,5 +1,26 @@
 version: 2
 jobs:
+  foxy:
+    docker:
+      - image: ros:foxy
+    steps:
+      - checkout
+      - run:
+          name: Set Up Container
+          command: |
+            apt-get update -qq
+            source /opt/ros/foxy/setup.bash
+            mkdir ~/ros
+            ln -s ~/project/ros2 ~/ros/src
+            cd ~/ros
+            rosdep install --from-paths . --ignore-src -y
+      - run:
+          name: Build
+          command: |
+            source /opt/ros/foxy/setup.bash
+            cd ~/ros
+            colcon build
+
   eloquent:
     docker:
       - image: ros:eloquent
