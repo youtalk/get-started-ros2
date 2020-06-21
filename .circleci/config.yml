@@ -92,8 +92,6 @@ jobs:
       - run:
           name: Set Up Container
           command: |
-            apt-get update -qq
-            apt-get install -y python-catkin-tools
             source /opt/ros/noetic/setup.bash
             mkdir ~/ros
             ln -s ~/project/ros1 ~/ros/src
@@ -104,7 +102,7 @@ jobs:
           command: |
             source /opt/ros/noetic/setup.bash
             cd ~/ros
-            catkin build
+            catkin_make
 
   melodic:
     docker:
