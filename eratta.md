@@ -20,5 +20,6 @@ title: 正誤表
 | P. 69 15行目             | https://github.com/ros2/ros2/wiki/Colcon-Tutorial | https://index.ros.org/doc/ros2/Tutorials/Colcon-Tutorial/        |
 | P. 73 ソースコード14行目 | ament_target_dependencies(${target} "rclcpp")     | ament_target_dependencies(${target} "rclcpp" "hello_world_msgs") |
 | P. 81 5行目              | サーバー                                          | サーバ                                                           |
+| P. 114 3行目             | これまでどうり                                    | これまでどおり                                                   |
 | P. 217 19行目            | ros2 component load /ComponentManager composition | ros2 component load /ComponentManager hello_world                |
-|                        |                                                   |                                                                  |
+
