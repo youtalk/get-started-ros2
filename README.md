@@ -68,6 +68,6 @@ title: オンラインリソース
 > $ mkdir ~/ros2 && cd ~/ros2
 > $ ln -s ~/get-started-ros2/ros2 src
 > $ rosdep install --from-paths src --ignore-src -r -y
-> $ colcon build
+> $ colcon build --symlink-install
 > $ . ~/ros2/install/setup.bash
 > ```

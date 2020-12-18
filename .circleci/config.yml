@@ -19,7 +19,7 @@ jobs:
           command: |
             source /opt/ros/foxy/setup.bash
             cd ~/ros
-            colcon build
+            colcon build --symlink-install
 
   eloquent:
     docker:
@@ -40,7 +40,7 @@ jobs:
           command: |
             source /opt/ros/eloquent/setup.bash
             cd ~/ros
-            colcon build
+            colcon build --symlink-install
 
   dashing:
     docker:
@@ -61,7 +61,7 @@ jobs:
           command: |
             source /opt/ros/dashing/setup.bash
             cd ~/ros
-            colcon build
+            colcon build --symlink-install
 
   crystal:
     docker:
@@ -82,7 +82,7 @@ jobs:
           command: |
             source /opt/ros/crystal/setup.bash
             cd ~/ros
-            colcon build
+            colcon build --symlink-install
 
   noetic:
     docker:
