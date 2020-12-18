@@ -13,7 +13,6 @@ title: 正誤表
 |--------------------------|---------------------------------------------------|------------------------------------------------------------------|
 | P. iii 1行目             | Robot Operation System                            | Robot Operating System                                           |
 | P. xi 1行目              | ROSCon Japan                                      | ROSCon JP                                                        |
-| P. 46, 47                | python3-rosdep                                    | python-rosdep                                                    |
 | P. 55 18行目             | 熟成している                                      | 成熟している                                                     |
 | P. 57 図3-2              | rmv                                               | rmw                                                              |
 | P. 57 図3-2              | DOS ベンダ                                        | DDS ベンダ                                                       |
@@ -22,4 +21,3 @@ title: 正誤表
 | P. 81 5行目              | サーバー                                          | サーバ                                                           |
 | P. 114 3行目             | これまでどうり                                    | これまでどおり                                                   |
 | P. 217 19行目            | ros2 component load /ComponentManager composition | ros2 component load /ComponentManager hello_world                |
-
