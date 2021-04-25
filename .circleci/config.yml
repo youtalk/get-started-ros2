@@ -21,27 +21,6 @@ jobs:
             cd ~/ros
             colcon build --symlink-install
 
-  eloquent:
-    docker:
-      - image: ros:eloquent
-    steps:
-      - checkout
-      - run:
-          name: Set Up Container
-          command: |
-            apt-get update -qq
-            source /opt/ros/eloquent/setup.bash
-            mkdir ~/ros
-            ln -s ~/project/ros2 ~/ros/src
-            cd ~/ros
-            rosdep install --from-paths . --ignore-src -y
-      - run:
-          name: Build
-          command: |
-            source /opt/ros/eloquent/setup.bash
-            cd ~/ros
-            colcon build --symlink-install
-
   dashing:
     docker:
       - image: ros:dashing
@@ -60,27 +39,6 @@ jobs:
           name: Build
           command: |
             source /opt/ros/dashing/setup.bash
-            cd ~/ros
-            colcon build --symlink-install
-
-  crystal:
-    docker:
-      - image: ros:crystal
-    steps:
-      - checkout
-      - run:
-          name: Set Up Container
-          command: |
-            apt-get update -qq
-            source /opt/ros/crystal/setup.bash
-            mkdir ~/ros
-            ln -s ~/project/ros2 ~/ros/src
-            cd ~/ros
-            rosdep install --from-paths . --ignore-src -y
-      - run:
-          name: Build
-          command: |
-            source /opt/ros/crystal/setup.bash
             cd ~/ros
             colcon build --symlink-install
 
@@ -131,7 +89,6 @@ workflows:
   ros_build:
     jobs:
       - foxy
-      - eloquent
       - dashing
       - noetic
       - melodic
