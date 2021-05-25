@@ -109,6 +109,7 @@ workflows:
   version: 2
   ros_build:
     jobs:
+      - galantic
       - foxy
       - dashing
       - noetic
