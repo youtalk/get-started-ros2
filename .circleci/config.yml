@@ -1,15 +1,15 @@
 version: 2
 jobs:
-  galantic:
+  galactic:
     docker:
-      - image: ros:galantic
+      - image: ros:galactic
     steps:
       - checkout
       - run:
           name: Set Up Container
           command: |
             apt-get update -qq
-            source /opt/ros/galantic/setup.bash
+            source /opt/ros/galactic/setup.bash
             mkdir ~/ros
             ln -s ~/project/ros2 ~/ros/src
             cd ~/ros
@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Build
           command: |
-            source /opt/ros/galantic/setup.bash
+            source /opt/ros/galactic/setup.bash
             cd ~/ros
             colcon build --symlink-install
 
@@ -109,7 +109,7 @@ workflows:
   version: 2
   ros_build:
     jobs:
-      - galantic
+      - galactic
       - foxy
       - dashing
       - noetic
