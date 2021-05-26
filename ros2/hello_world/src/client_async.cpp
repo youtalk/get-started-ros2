@@ -62,7 +62,7 @@ public:
     //   auto future_result = client_->async_send_request(request);
     //   if (rclcpp::spin_until_future_complete(
     //       this->shared_from_this(), future_result) ==
-    //       rclcpp::executor::FutureReturnCode::SUCCESS) {
+    //       rclcpp::FutureReturnCode::SUCCESS) {
     //     RCLCPP_INFO(this->get_logger(), "%s",
     //                 future_result.get()->result ? "true" : "false");
     //     rclcpp::shutdown();
