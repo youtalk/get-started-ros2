@@ -99,6 +99,7 @@ int main(int argc, char * argv[])
   rclcpp::init(argc, argv);
 
   auto node = std::make_shared<Talker>("chatter");
+  node->set_parameter(node->get_parameter("decoration"));
   rclcpp::spin(node);
   rclcpp::shutdown();
 
