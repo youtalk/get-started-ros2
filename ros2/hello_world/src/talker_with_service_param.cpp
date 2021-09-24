@@ -62,9 +62,8 @@ public:
     srv_ = create_service<SetMessage>(
       "set_message", handle_set_message);
 
-    decoration_ = "";
     // decorationパラメータの宣言
-    declare_parameter("decoration");
+    decoration_ = declare_parameter("decoration", "");
     // パラメータ設定イベントのコールバック関数
     auto parameter_callback =
       [this](const std::vector<rclcpp::Parameter> params)
