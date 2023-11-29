@@ -1,15 +1,15 @@
 version: 2
 jobs:
-  galactic:
+  humble:
     docker:
-      - image: ros:galactic
+      - image: ros:humble
     steps:
       - checkout
       - run:
           name: Set Up Container
           command: |
             apt-get update -qq
-            source /opt/ros/galactic/setup.bash
+            source /opt/ros/humble/setup.bash
             mkdir ~/ros
             ln -s ~/project/ros2 ~/ros/src
             cd ~/ros
@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Build
           command: |
-            source /opt/ros/galactic/setup.bash
+            source /opt/ros/humble/setup.bash
             cd ~/ros
             colcon build --symlink-install
 
@@ -42,27 +42,6 @@ jobs:
             cd ~/ros
             colcon build --symlink-install
 
-  dashing:
-    docker:
-      - image: ros:dashing
-    steps:
-      - checkout
-      - run:
-          name: Set Up Container
-          command: |
-            apt-get update -qq
-            source /opt/ros/dashing/setup.bash
-            mkdir ~/ros
-            ln -s ~/project/ros2 ~/ros/src
-            cd ~/ros
-            rosdep install --from-paths . --ignore-src -y
-      - run:
-          name: Build
-          command: |
-            source /opt/ros/dashing/setup.bash
-            cd ~/ros
-            colcon build --symlink-install
-
   noetic:
     docker:
       - image: ros:noetic
@@ -83,34 +62,10 @@ jobs:
             cd ~/ros
             catkin_make
 
-  melodic:
-    docker:
-      - image: ros:melodic
-    steps:
-      - checkout
-      - run:
-          name: Set Up Container
-          command: |
-            apt-get update -qq
-            apt-get install -y python-catkin-tools
-            source /opt/ros/melodic/setup.bash
-            mkdir ~/ros
-            ln -s ~/project/ros1 ~/ros/src
-            cd ~/ros
-            rosdep install --from-paths . --ignore-src -y
-      - run:
-          name: Build
-          command: |
-            source /opt/ros/melodic/setup.bash
-            cd ~/ros
-            catkin build
-
 workflows:
   version: 2
   ros_build:
     jobs:
-      - galactic
+      - humble
       - foxy
-      - dashing
       - noetic
-      - melodic
