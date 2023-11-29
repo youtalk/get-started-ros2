@@ -64,7 +64,7 @@ public:
       "set_message", handle_set_message);
 
     // decorationパラメータの宣言
-    decoration_ = declare_parameter("decoration", rclcpp::PARAMETER_STRING, "");
+    decoration_ = declare_parameter("decoration", "");
     // パラメータ設定イベントのコールバック関数
     auto parameter_callback =
       [this](const std::vector<rclcpp::Parameter> params)
