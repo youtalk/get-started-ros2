@@ -11,6 +11,7 @@ title: オンラインリソース
 
 サンプルコードの動作確認は、以下のROSディストリビューションで行なっております。
 
+- ROS 2 Galactic Geochelone
 - ROS 2 Foxy Fitzroy
 - ROS 2 Dashing Diademata
 - ROS 1 Noetic Ninjemys

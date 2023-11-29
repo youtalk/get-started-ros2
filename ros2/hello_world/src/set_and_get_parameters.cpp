@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include <memory>
+#include <rclcpp/parameter_value.hpp>
 #include <sstream>
 #include <vector>
 #include <rclcpp/rclcpp.hpp>
@@ -26,9 +27,9 @@ int main(int argc, char ** argv)
   auto node = rclcpp::Node::make_shared("set_and_get_parameters");
 
   // パラメータの宣言
-  node->declare_parameter("foo");
-  node->declare_parameter("bar");
-  node->declare_parameter("baz");
+  node->declare_parameter("foo", rclcpp::PARAMETER_INTEGER);
+  node->declare_parameter("bar", rclcpp::PARAMETER_STRING);
+  node->declare_parameter("baz", rclcpp::PARAMETER_DOUBLE);
 
   // パラメータ設定・取得サービスのクライアント
   auto parameters_client = std::make_shared<

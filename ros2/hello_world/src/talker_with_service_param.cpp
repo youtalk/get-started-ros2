@@ -15,6 +15,7 @@
 #include <chrono>
 #include <cstdio>
 #include <memory>
+#include <rclcpp/parameter_value.hpp>
 #include <string>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
@@ -63,7 +64,7 @@ public:
       "set_message", handle_set_message);
 
     // decorationパラメータの宣言
-    decoration_ = declare_parameter("decoration", "");
+    decoration_ = declare_parameter("decoration", rclcpp::PARAMETER_STRING, "");
     // パラメータ設定イベントのコールバック関数
     auto parameter_callback =
       [this](const std::vector<rclcpp::Parameter> params)
@@ -81,7 +82,7 @@ public:
       };
 
     // パラメータ設定イベントのコールバック関数設定
-    set_on_parameters_set_callback(parameter_callback);
+    auto result = add_on_set_parameters_callback(parameter_callback);
   }
 
 private:
