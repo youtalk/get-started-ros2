@@ -11,11 +11,9 @@ title: オンラインリソース
 
 サンプルコードの動作確認は、以下のROSディストリビューションで行なっております。
 
-- ROS 2 Galactic Geochelone
+- [ROS 2 Humble Hawksbill](https://github.com/youtalk/get-started-ros2/tree/humble)
 - ROS 2 Foxy Fitzroy
-- ROS 2 Dashing Diademata
 - ROS 1 Noetic Ninjemys
-- ROS 1 Melodic Morenia
 
 サンプルコードは紙面の文字数制限の都合上、1行あたり72文字以内で記述しています。ROS2公式の `ament_uncrustify` の整形ルールとは合致しない点、ご留意ください。　
 
