@@ -5,4 +5,4 @@ int32 order
 int32[] sequence
 ---
 # Feedback
-int32[] sequence
+int32[] partial_sequence

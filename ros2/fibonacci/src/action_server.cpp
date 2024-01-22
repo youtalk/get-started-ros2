@@ -12,21 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <inttypes.h>
 #include <memory>
+
 #include "hello_world_msgs/action/fibonacci.hpp"
 #include "rclcpp/rclcpp.hpp"
 // TODO(jacobperron): Remove this once it is included as part of 'rclcpp.hpp'
 #include "rclcpp_action/rclcpp_action.hpp"
 
-using Fibonacci = hello_world_msgs::action::Fibonacci;
-using GoalHandleFibonacci = rclcpp_action::ServerGoalHandle<Fibonacci>;
+namespace action_tutorials_cpp
+{
 
-class MinimalActionServer : public rclcpp::Node
+class FibonacciActionServer : public rclcpp::Node
 {
 public:
-  explicit MinimalActionServer()
-  : Node("minimal_action_server")
+  using Fibonacci = hello_world_msgs::action::Fibonacci;
+  using GoalHandleFibonacci = rclcpp_action::ServerGoalHandle<Fibonacci>;
+
+  explicit FibonacciActionServer()
+  : Node("Fibonacci_action_server")
   {
     using namespace std::placeholders;
 
@@ -37,9 +40,9 @@ public:
       this->get_node_logging_interface(),
       this->get_node_waitables_interface(),
       "fibonacci",
-      std::bind(&MinimalActionServer::handle_goal, this, _1, _2),
-      std::bind(&MinimalActionServer::handle_cancel, this, _1),
-      std::bind(&MinimalActionServer::handle_accepted, this, _1));
+      std::bind(&FibonacciActionServer::handle_goal, this, _1, _2),
+      std::bind(&FibonacciActionServer::handle_cancel, this, _1),
+      std::bind(&FibonacciActionServer::handle_accepted, this, _1));
   }
 
 private:
@@ -52,8 +55,8 @@ private:
   {
     RCLCPP_INFO(this->get_logger(), "Received goal request with order %d", goal->order);
     (void)uuid;
-    // 9000以上は拒否
-    if (goal->order > 9000) {
+    // 46より大きい数は拒否
+    if (goal->order > 46) {
       return rclcpp_action::GoalResponse::REJECT;
     }
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
@@ -66,6 +69,16 @@ private:
     RCLCPP_INFO(this->get_logger(), "Received request to cancel goal");
     (void)goal_handle;
     return rclcpp_action::CancelResponse::ACCEPT;
+  }
+
+  // アクションの実行開始時に呼び出されるハンドラ
+  void handle_accepted(const std::shared_ptr<GoalHandleFibonacci> goal_handle)
+  {
+    using namespace std::placeholders;
+    // executeメソッドの実行でExecutorの処理がブロックされないように、
+    // スレッド実行
+    std::thread{std::bind(&FibonacciActionServer::execute, this, _1),
+                goal_handle}.detach();
   }
 
   // アクション実行の中身
@@ -104,21 +117,16 @@ private:
       RCLCPP_INFO(this->get_logger(), "Goal Succeeded");
     }
   }
+};  // class FibonacciActionServer
 
-  // アクションの実行開始時に呼び出されるハンドラ
-  void handle_accepted(const std::shared_ptr<GoalHandleFibonacci> goal_handle)
-  {
-    using namespace std::placeholders;
-    // executeメソッドの実行でExecutorの処理がブロックされないように、
-    // スレッド実行
-    std::thread{std::bind(&MinimalActionServer::execute, this, _1), goal_handle}.detach();
-  }
-};
+} // namespace action_tutorials_cpp
+
+RCLCPP_COMPONENTS_REGISTER_NODE(action_tutorials_cpp::FibonacciActionServer)
 
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
-  auto action_server = std::make_shared<MinimalActionServer>();
+  auto action_server = std::make_shared<FibonacciActionServer>();
 
   rclcpp::spin(action_server);
   rclcpp::shutdown();
