@@ -28,6 +28,9 @@ namespace hello_world
 class ListenerComponent : public rclcpp::Node
 {
 public:
+  // マルチOSに対応した共有ライブラリの最適化
+  HELLO_WORLD_PUBLIC
+  // コンストラクター引数をNodeOptionsに変更
   explicit ListenerComponent(const rclcpp::NodeOptions & options)
     : Node("listener_component", options)
   {
