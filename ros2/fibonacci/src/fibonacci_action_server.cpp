@@ -29,7 +29,7 @@ public:
   using GoalHandleFibonacci = rclcpp_action::ServerGoalHandle<Fibonacci>;
 
   explicit FibonacciActionServer()
-  : Node("Fibonacci_action_server")
+  : Node("fibonacci_action_server")
   {
     using namespace std::placeholders;
 
