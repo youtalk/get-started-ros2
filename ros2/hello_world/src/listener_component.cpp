@@ -22,6 +22,7 @@
 
 using namespace std::chrono_literals;
 
+// ネームスペースの設定
 namespace hello_world
 {
 
