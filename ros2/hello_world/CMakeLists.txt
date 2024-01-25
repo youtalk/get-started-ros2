@@ -35,31 +35,22 @@ custom_executable(set_and_get_parameters)
 
 include_directories(include)
 
-# 共有ライブラリの生成
-add_library(talker_component SHARED
-  src/talker_component.cpp)
-target_compile_definitions(talker_component
-  PRIVATE "COMPOSITION_BUILDING_DLL")
-ament_target_dependencies(talker_component
-  "rclcpp"
-  "rclcpp_components"
-  "hello_world_msgs")
-# クラスローダーへの共有ライブラリの登録
-rclcpp_components_register_nodes(talker_component
-  "hello_world::TalkerComponent")
+# コンポーネント設定の便利関数
+function(custom_component target class_name)
+  add_executable(${target} src/${target}.cpp)
+  target_compile_definitions(${target}
+    PRIVATE "COMPOSITION_BUILDING_DLL")
+  ament_target_dependencies(${target}
+    "rclcpp"
+    "rclcpp_components"
+    "hello_world_msgs")
+  # クラスローダーへの共有ライブラリの登録
+  rclcpp_components_register_nodes(${target} ${class_name})
+endfunction()
 
 # 共有ライブラリの生成
-add_library(listener_component SHARED
-  src/listener_component.cpp)
-target_compile_definitions(listener_component
-  PRIVATE "COMPOSITION_BUILDING_DLL")
-ament_target_dependencies(listener_component
-  "rclcpp"
-  "rclcpp_components"
-  "hello_world_msgs")
-# クラスローダーへの共有ライブラリの登録
-rclcpp_components_register_nodes(listener_component
-  "hello_world::ListenerComponent")
+custom_component(talker_component "hello_world::TalkerComponent")
+custom_component(listener_component "hello_world::ListenerComponent")
 
 install(DIRECTORY
     launch
