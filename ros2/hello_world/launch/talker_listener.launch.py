@@ -19,9 +19,11 @@ import launch_ros.actions
 def generate_launch_description():
     return LaunchDescription([
         launch_ros.actions.Node(
-            package='hello_world', node_executable='talker',
+            package='hello_world', namespace='hello_world',
+            executable='talker', name='talker',
             output='screen'),
         launch_ros.actions.Node(
-            package='hello_world', node_executable='listener',
+            package='hello_world', namespace='hello_world',
+            executable='listener', name='listener',
             output='screen'),
     ])
