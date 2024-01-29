@@ -24,11 +24,12 @@ def generate_launch_description():
 
     return LaunchDescription([
         launch_ros.actions.Node(
-            package='hello_world',
-            node_executable='talker_with_service_param',
-            node_name='talker', output='screen',
+            package='hello_world', namespace='hello_world',
+            executable='talker_with_service_param',
+            name='talker', output='screen',
             parameters=[params_file]),
         launch_ros.actions.Node(
-            package='hello_world',
-            node_executable='listener', output='screen'),
+            package='hello_world', namespace='hello_world',
+            executable='listener', name='listener',
+            output='screen'),
     ])
