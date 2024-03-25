@@ -27,7 +27,7 @@ class MinimalClient(Node):
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('waiting...')
         # add_two_intsサービスの引数
-        self.request = AddTwoInts.request()
+        self.request = AddTwoInts.Request()
 
     def call_async(self):
         # add_two_intsサービスの引数にa = 1, b = 2を設定
@@ -54,4 +54,5 @@ if __name__ == '__main__':
             (minimal_client.request.a, minimal_client.request.b,
              response.sum))
 
+    minimal_client.destroy_node()
     rclpy.shutdown()

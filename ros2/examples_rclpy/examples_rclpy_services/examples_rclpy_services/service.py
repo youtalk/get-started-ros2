@@ -39,4 +39,5 @@ if __name__ == '__main__':
     rclpy.init(args=args)
     minimal_service = MinimalService()
     rclpy.spin(minimal_service)
+    minimal_service.destroy_node()
     rclpy.shutdown()
