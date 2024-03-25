@@ -24,7 +24,7 @@ class MinimalSubscriber(Node):
         # String型のchatterトピックを受信するsubscriptionの定義
         # （listener_callbackは受信毎に呼び出されるコールバック関数）
         self.subscription = self.create_subscription(
-            String, 'chatter', self.listener_callback)
+            String, 'chatter', self.listener_callback, 10)
 
     def listener_callback(self, msg):
         # msgの中身を標準出力にログ
@@ -35,4 +35,5 @@ if __name__ == '__main__':
     rclpy.init(args=args)
     minimal_subscriber = MinimalSubscriber()
     rclpy.spin(minimal_subscriber)
+    minimal_subscriber.destroy_node()
     rclpy.shutdown()

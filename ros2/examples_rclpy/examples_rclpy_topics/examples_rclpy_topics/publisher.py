@@ -22,17 +22,19 @@ class MinimalPublisher(Node):
     def __init__(self):
         super().__init__('minimal_publisher')
         # String型のchatterトピックを送信するpublisherの定義
-        self.publisher = self.create_publisher(String, 'chatter')
+        self.publisher = self.create_publisher(String, 'chatter', 10)
         # 送信周期毎にtimer_callbackを呼び出し（送信周期は0.5秒）
         self.timer = self.create_timer(0.5, self.timer_callback)
+        self.i = 0
 
     def timer_callback(self):
         msg = String()
-        msg.data = 'Hello World!'
+        msg.data = 'Hello World: %d' % self.i
         # chatterトピックにmsgを送信
         self.publisher.publish(msg)
         # msgの中身を標準出力にログ
         self.get_logger().info(msg.data)
+        self.i += 1
 
 
 if __name__ == '__main__':
@@ -42,5 +44,7 @@ if __name__ == '__main__':
     minimal_publisher = MinimalPublisher()
     # minimal_publisherノードの実行開始
     rclpy.spin(minimal_publisher)
+    # minimal_publisherノードの削除
+    minimal_publisher.destroy_node()
     # Pythonクライアントライブラリの終了
     rclpy.shutdown()
