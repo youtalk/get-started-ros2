@@ -17,7 +17,7 @@ import time
 from example_interfaces.action import Fibonacci
 
 import rclpy
-from rclpy.action import ActionServer, CancelResponse, GoalResponse
+from rclpy.action import ActionServer
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.node import Node
@@ -49,7 +49,7 @@ class MinimalActionServer(Node):
         for i in range(1, goal_handle.request.order):
             if goal_handle.is_cancel_requested:
                 # アクションのキャンセル
-                goal_handle.set_canceled()
+                goal_handle.canceled()
                 self.get_logger().info('goal canceled')
                 return Fibonacci.Result()
 
@@ -62,7 +62,7 @@ class MinimalActionServer(Node):
             time.sleep(1)
 
         # アクションの実行結果の送信
-        goal_handle.set_succeeded()
+        goal_handle.succeeded()
         result = Fibonacci.Result()
         result.sequence = msg.sequence
         self.get_logger().info('result: {0}'.format(result.sequence))
