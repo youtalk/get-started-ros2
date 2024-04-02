@@ -40,15 +40,16 @@ class MinimalActionClient(Node):
 
     def feedback_callback(self, feedback):
         self.get_logger().info('feedback: {0}'.format(
-            feedback.sequence))
+            feedback.feedback.sequence))
 
     def get_result_callback(self, future):
+        result = future.result().result
         # アクションの実行状態の取得
-        status = future.result().action_status
+        status = future.result().status
         if status == GoalStatus.STATUS_SUCCEEDED:
             # 実行成功ならフィボナッチ数列を標準出力にログ
             self.get_logger().info('result: {0}'.format(
-                future.result().sequence))
+                result.sequence))
 
         # プログラムの終了
         rclpy.shutdown()
