@@ -30,6 +30,7 @@ setup(
         'console_scripts': [
             'publisher = ' + package_name + '.publisher:main',
             'subscriber = ' + package_name + '.subscriber:main',
+            'composed = ' + package_name + '.composed:main',
         ],
     },
 )
