@@ -25,9 +25,9 @@
 constexpr char[] kWindowName = "Result";
 constexpr char[] kClassifierFileName = "haarcascade_frontalface_alt.xml";
 
-class FaceDetection : public rclcpp::Node {
+class FaceDetectionComponent : public rclcpp::Node {
 public:
-  FaceDetection() : Node("image_converter") {
+  FaceDetectionComponent() : Node("image_converter") {
     cv::namedWindow(kWindowName);
 
     if (!classifier_.load(kClassifierFileName)) {
@@ -36,11 +36,11 @@ public:
     }
 
     rmw_qos_profile_t qos = rmw_qos_profile_default;
-    sub_ = image_transport::create_subscription(this, "/camera/color/image_raw", std::bind(&FaceDetection::ImageCallback, this, std::placeholders::_1), "raw", qos);
+    sub_ = image_transport::create_subscription(this, "/camera/color/image_raw", std::bind(&FaceDetectionComponent::ImageCallback, this, std::placeholders::_1), "raw", qos);
     pub_ = image_transport::create_publisher(this, "face_detection_result", qos);
   }
 
-  ~FaceDetection() {
+  ~FaceDetectionComponent() {
     cv::destroyWindow(kWindowName);
   }
 
