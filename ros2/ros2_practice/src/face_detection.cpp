@@ -36,8 +36,8 @@ public:
     }
 
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
-    sub_ = image_transport::create_subscription(this, "/camera/color/image_raw", std::bind(&FaceDetectionComponent::ImageCallback, this, std::placeholders::_1), "raw", qos);
     pub_ = image_transport::create_publisher(this, "face_detection_result", qos);
+    sub_ = image_transport::create_subscription(this, "/camera/color/image_raw", std::bind(&FaceDetectionComponent::ImageCallback, this, std::placeholders::_1), "raw", qos);
   }
 
   ~FaceDetectionComponent() {
@@ -65,10 +65,10 @@ private:
 
     cv::imshow(kWindowName, cv_image->image);
     cv::waitKey(3);
-    pub_.publish(cv_image->toImageMsg());
+    pub_->publish(cv_image->toImageMsg());
   }
 
   cv::CascadeClassifier classifier_;
-  image_transport::Subscriber sub_;
-  image_transport::Publisher pub_;
+  image_transport::Publisher::SharedPtr pub_;
+  image_transport::Subscriber::SharedPtr sub_;
 };

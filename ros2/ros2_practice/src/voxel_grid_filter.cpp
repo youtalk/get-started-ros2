@@ -27,14 +27,12 @@ public:
     leaf_size_ = declare_parameter("leaf_size", 0.1);
 
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
+    pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("filter_result", qos);
     sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
         "/camera/depth/color/points",
-        10,
+        qos,
         std::bind(&VoxelGridFilterComponent::PointCloud2Callback, this, std::placeholders::_1) \
     );
-
-    using namespace std::chrono_literals;
-    pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("filter_result", 10);
   }
 
 private:
@@ -42,16 +40,16 @@ private:
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cloud);
 
-    pcl::VoxelGrid<pcl::PointXYZ> sor;
-    sor.setInputCloud(cloud);
-    sor.setLeafSize(leaf_size_, leaf_size_, leaf_size_);
+    pcl::VoxelGrid<pcl::PointXYZ> voxel_grid;
+    voxel_grid.setInputCloud(cloud);
+    voxel_grid.setLeafSize(leaf_size_, leaf_size_, leaf_size_);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
-    sor.filter(*cloud_filtered);
+    voxel_grid.filter(*cloud_filtered);
 
-    sensor_msgs::msg::PointCloud2::SharedPtr cloud_filtered_msg(new sensor_msgs::msg::PointCloud2);
-    pcl::toROSMsg(*cloud_filtered, *cloud_filtered_msg);
-    cloud_filtered_msg->header = msg->header;
-    pub_->publish(*cloud_filtered_msg);
+    sensor_msgs::msg::PointCloud2::SharedPtr filtered_msg(new sensor_msgs::msg::PointCloud2);
+    pcl::toROSMsg(*cloud_filtered, *filtered_msg);
+    filtered_msg->header = msg->header;
+    pub_->publish(*filtered_msg);
   }
 
   double leaf_size_;
