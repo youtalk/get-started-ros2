@@ -23,7 +23,10 @@
 
 class OutlierRemovalFilterComponent : public rclcpp::Node {
 public:
-  OutlierRemovalFilterComponent() : Node("voxel_grid_filter") {
+  OutlierRemovalFilterComponent() : Node("outlier_removal_filter") {
+    mean_k_ = this->declare_parameter("mean_k", 50);
+    stddev_mul_thresh_ = this->declare_parameter("stddev_mul_thresh", 0.1);
+
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
     pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("filter_result", qos);
     sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
@@ -40,8 +43,8 @@ private:
 
     pcl::StatisticalOutlierRemoval<pcl::PointXYZRGB> filter;
     filter.setInputCloud(cloud);
-    filter.setMeanK(50);
-    filter.setStddevMulThresh(0.1);
+    filter.setMeanK(mean_k_);
+    filter.setStddevMulThresh(stddev_mul_thresh_);
     filter.setNegative(false);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
     filter.filter(*cloud_filtered);
@@ -52,6 +55,8 @@ private:
     pub_->publish(*filtered_msg);
   }
 
+  int mean_k_;
+  int stddev_mul_thresh_;
   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_;
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr sub_;
 };
