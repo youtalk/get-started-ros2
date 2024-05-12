@@ -35,7 +35,7 @@ public:
       std::abort();
     }
 
-    rmw_qos_profile_t qos = rmw_qos_profile_default;
+    rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
     sub_ = image_transport::create_subscription(this, "/camera/color/image_raw", std::bind(&FaceDetectionComponent::ImageCallback, this, std::placeholders::_1), "raw", qos);
     pub_ = image_transport::create_publisher(this, "face_detection_result", qos);
   }
@@ -45,10 +45,6 @@ public:
   }
 
 private:
-  cv::CascadeClassifier classifier_;
-  image_transport::Subscriber sub_;
-  image_transport::Publisher pub_;
-
   void ImageCallback(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
     cv_bridge::CvImagePtr cv_image;
     try {
@@ -71,4 +67,8 @@ private:
     cv::waitKey(3);
     pub_.publish(cv_image->toImageMsg());
   }
+
+  cv::CascadeClassifier classifier_;
+  image_transport::Subscriber sub_;
+  image_transport::Publisher pub_;
 };
