@@ -21,17 +21,15 @@
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/filters/voxel_grid.h>
 
-class VoxelGridFilterComponent : public rclcpp::Node {
+class OutlierRemovalFilterComponent : public rclcpp::Node {
 public:
-  VoxelGridFilterComponent() : Node("voxel_grid_filter") {
-    leaf_size_ = declare_parameter("leaf_size", 0.1);
-
+  OutlierRemovalFilterComponent() : Node("voxel_grid_filter") {
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
     pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("filter_result", qos);
     sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
         "/camera/depth/color/points",
         qos,
-        std::bind(&VoxelGridFilterComponent::PointCloud2Callback, this, std::placeholders::_1) \
+        std::bind(&OutlierRemovalFilterComponent::PointCloud2Callback, this, std::placeholders::_1) \
     );
   }
 
@@ -40,11 +38,13 @@ private:
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cloud);
 
-    pcl::VoxelGrid<pcl::PointXYZ> voxel_grid;
-    voxel_grid.setInputCloud(cloud);
-    voxel_grid.setLeafSize(leaf_size_, leaf_size_, leaf_size_);
+    pcl::StatisticalOutlierRemoval<pcl::PointXYZRGB> filter;
+    filter.setInputCloud(cloud);
+    filter.setMeanK(50);
+    filter.setStddevMulThresh(0.1);
+    filter.setNegative(false);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
-    voxel_grid.filter(*cloud_filtered);
+    filter.filter(*cloud_filtered);
 
     sensor_msgs::msg::PointCloud2::SharedPtr filtered_msg(new sensor_msgs::msg::PointCloud2);
     pcl::toROSMsg(*cloud_filtered, *filtered_msg);
@@ -52,7 +52,6 @@ private:
     pub_->publish(*filtered_msg);
   }
 
-  double leaf_size_;
   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_;
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr sub_;
 };
