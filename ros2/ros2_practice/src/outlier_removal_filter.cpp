@@ -49,10 +49,10 @@ private:
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
     filter.filter(*cloud_filtered);
 
-    sensor_msgs::msg::PointCloud2::SharedPtr filtered_msg(new sensor_msgs::msg::PointCloud2);
-    pcl::toROSMsg(*cloud_filtered, *filtered_msg);
-    filtered_msg->header = msg->header;
-    pub_->publish(*filtered_msg);
+    sensor_msgs::msg::PointCloud2::SharedPtr msg_filtered(new sensor_msgs::msg::PointCloud2);
+    pcl::toROSMsg(*cloud_filtered, *msg_filtered);
+    msg_filtered->header = msg->header;
+    pub_->publish(*msg_filtered);
   }
 
   int mean_k_;
