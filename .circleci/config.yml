@@ -1,5 +1,26 @@
 version: 2
 jobs:
+  humble:
+    docker:
+      - image: ros:humble
+    steps:
+      - checkout
+      - run:
+          name: Set Up Container
+          command: |
+            apt-get update -qq
+            source /opt/ros/humble/setup.bash
+            mkdir ~/ros
+            ln -s ~/project/ros2 ~/ros/src
+            cd ~/ros
+            rosdep install --from-paths . --ignore-src -y
+      - run:
+          name: Build
+          command: |
+            source /opt/ros/humble/setup.bash
+            cd ~/ros
+            colcon build --symlink-install
+
   foxy:
     docker:
       - image: ros:foxy
@@ -18,27 +39,6 @@ jobs:
           name: Build
           command: |
             source /opt/ros/foxy/setup.bash
-            cd ~/ros
-            colcon build --symlink-install
-
-  dashing:
-    docker:
-      - image: ros:dashing
-    steps:
-      - checkout
-      - run:
-          name: Set Up Container
-          command: |
-            apt-get update -qq
-            source /opt/ros/dashing/setup.bash
-            mkdir ~/ros
-            ln -s ~/project/ros2 ~/ros/src
-            cd ~/ros
-            rosdep install --from-paths . --ignore-src -y
-      - run:
-          name: Build
-          command: |
-            source /opt/ros/dashing/setup.bash
             cd ~/ros
             colcon build --symlink-install
 
@@ -62,33 +62,10 @@ jobs:
             cd ~/ros
             catkin_make
 
-  melodic:
-    docker:
-      - image: ros:melodic
-    steps:
-      - checkout
-      - run:
-          name: Set Up Container
-          command: |
-            apt-get update -qq
-            apt-get install -y python-catkin-tools
-            source /opt/ros/melodic/setup.bash
-            mkdir ~/ros
-            ln -s ~/project/ros1 ~/ros/src
-            cd ~/ros
-            rosdep install --from-paths . --ignore-src -y
-      - run:
-          name: Build
-          command: |
-            source /opt/ros/melodic/setup.bash
-            cd ~/ros
-            catkin build
-
 workflows:
   version: 2
   ros_build:
     jobs:
+      - humble
       - foxy
-      - dashing
       - noetic
-      - melodic
