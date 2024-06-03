@@ -20,9 +20,9 @@ function(custom_executable target)
     DESTINATION lib)
 endfunction()
 
-# action_serverノードのビルド設定
-custom_executable(action_server)
+# fibonacci_action_serverノードのビルド設定
+custom_executable(fibonacci_action_server)
 # action_clientノードのビルド設定
-custom_executable(action_client)
+custom_executable(fibonacci_action_client)
 
 ament_package()
