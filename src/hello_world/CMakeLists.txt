@@ -37,15 +37,14 @@ include_directories(include)
 
 # コンポーネント設定の便利関数
 function(custom_component target class_name)
-  add_executable(${target} src/${target}.cpp)
-  target_compile_definitions(${target}
-    PRIVATE "COMPOSITION_BUILDING_DLL")
+  # クラスローダーへの共有ライブラリの登録
+  rclcpp_components_register_node(${target}
+    PLUGIN ${class_name}
+    EXECUTABLE ${target})
   ament_target_dependencies(${target}
     "rclcpp"
     "rclcpp_components"
     "hello_world_msgs")
-  # クラスローダーへの共有ライブラリの登録
-  rclcpp_components_register_nodes(${target} ${class_name})
 endfunction()
 
 # 共有ライブラリの生成
