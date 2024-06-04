@@ -40,3 +40,5 @@ _site
 build
 install
 log
+
+src/dynamixel_hardware
