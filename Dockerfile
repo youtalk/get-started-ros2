@@ -1,5 +1,5 @@
 # hadolint global ignore=DL3006,DL3008,DL3013
-FROM ros:rolling
+FROM ros:jazzy
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 COPY src /get-started-ros2/src
@@ -12,6 +12,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-ins
 
 RUN rosdep update && rosdep install --ignore-src --from-paths src
 
-RUN source /opt/ros/rolling/setup.bash \
+RUN source /opt/ros/jazzy/setup.bash \
   && colcon build --cmake-args \
   --mixin release compile-commands
