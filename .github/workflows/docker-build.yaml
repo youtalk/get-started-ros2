@@ -35,7 +35,3 @@ jobs:
           context: .
           push: false
           tags: youtalk/get-started-ros2:latest
-          set: |
-            *.platform=linux/amd64
-            *.args.BASE_IMAGE=ros:humble-ros-base-jammy
-            *.args.ROS_DISTRO=humble

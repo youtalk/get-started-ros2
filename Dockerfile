@@ -1,9 +1,6 @@
 # hadolint global ignore=DL3006,DL3008,DL3013
-ARG BASE_IMAGE
-
-FROM $BASE_IMAGE
+FROM ros:humble
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-ARG ROS_DISTRO
 
 COPY src /get-started-ros2/src
 WORKDIR /get-started-ros2
@@ -15,6 +12,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-ins
 
 RUN rosdep update && rosdep install --ignore-src --from-paths src
 
-RUN source /opt/ros/"$ROS_DISTRO"/setup.bash \
+RUN source /opt/ros/humble/setup.bash \
   && colcon build --cmake-args \
   --mixin release compile-commands
