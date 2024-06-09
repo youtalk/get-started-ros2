@@ -10,7 +10,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-ins
 COPY src /get-started-ros2/src
 WORKDIR /get-started-ros2
 
-RUN rosdep update && rosdep install --ignore-src --from-paths src
+RUN apt-get update && rosdep update && rosdep install --ignore-src --from-paths src
 
 RUN source /opt/ros/humble/setup.bash \
   && colcon build --cmake-args \
