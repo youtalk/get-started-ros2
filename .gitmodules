@@ -1,9 +1,6 @@
-[submodule "ros1/create_autonomy"]
-	path = ros1/create_autonomy
-	url = https://github.com/youtalk/create_autonomy.git
-[submodule "ros2/create_autonomy"]
-	path = ros2/create_autonomy
-	url = https://github.com/youtalk/create_autonomy.git
-[submodule "ros2/libcreate"]
-	path = ros2/libcreate
-	url = https://github.com/AutonomyLab/libcreate.git
+[submodule "dynamixel_hardware_examples"]
+	path = src/dynamixel_hardware_examples
+	url = https://github.com/dynamixel-community/dynamixel_hardware_examples.git
+[submodule "src/example_interfaces"]
+	path = src/example_interfaces
+	url = https://github.com/ros2/example_interfaces.git
