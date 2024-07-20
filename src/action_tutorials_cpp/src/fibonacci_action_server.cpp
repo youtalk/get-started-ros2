@@ -42,9 +42,7 @@ public:
       {
         (void)uuid;
         RCLCPP_INFO(this->get_logger(), "Received goal request with order %d", goal->order);
-        // The Fibonacci action uses int32 for the return of sequences, which means it can only hold
-        // 2^31-1 (2147483647) before wrapping negative in two's complement. Based on empirical
-        // tests, that means that an order of > 46 will cause wrapping, so we don't allow that here.
+        // Fibonacciアクションはint32型で定義されているので、46より大きい値はオーバーフロー
         if (goal->order > 46) {
           return rclcpp_action::GoalResponse::REJECT;
         }
@@ -62,8 +60,7 @@ public:
     auto handle_accepted = [this](
       const std::shared_ptr<GoalHandleFibonacci> goal_handle)
       {
-        // this needs to return quickly to avoid blocking the executor,
-        // so we declare a lambda function to be called inside a new thread
+        // 実行スレッドをexecuteメソッドの完了待ちまでブロックしないようにスレッド実行
         auto execute_in_thread = [this, goal_handle]() {return this->execute(goal_handle);};
         std::thread{execute_in_thread}.detach();
       };
@@ -92,23 +89,23 @@ private:
     auto result = std::make_shared<Fibonacci::Result>();
 
     for (int i = 1; (i < goal->order) && rclcpp::ok(); ++i) {
-      // Check if there is a cancel request
+      // キャンセルリクエストの確認
       if (goal_handle->is_canceling()) {
         result->sequence = sequence;
         goal_handle->canceled(result);
         RCLCPP_INFO(this->get_logger(), "Goal canceled");
         return;
       }
-      // Update sequence
+      // フィボナッチ数列の更新
       sequence.push_back(sequence[i] + sequence[i - 1]);
-      // Publish feedback
+      // フィードバック（フィボナッチ数列の途中経過）の送信
       goal_handle->publish_feedback(feedback);
       RCLCPP_INFO(this->get_logger(), "Publish feedback");
 
       loop_rate.sleep();
     }
 
-    // Check if goal is done
+    // 返り値（フィボナッチ数列）の送信
     if (rclcpp::ok()) {
       result->sequence = sequence;
       goal_handle->succeed(result);
