@@ -66,6 +66,7 @@ public:
 
     // decorationパラメータの宣言
     decoration_ = declare_parameter("decoration", "");
+    // decorationパラメータの監視
     param_subscriber_ = std::make_shared<
         rclcpp::ParameterEventHandler>(this);
     cb_handle_ = param_subscriber_->add_parameter_callback(
