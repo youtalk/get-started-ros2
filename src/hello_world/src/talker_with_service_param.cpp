@@ -39,7 +39,8 @@ public:
         msg->data = data_;
 
         // decorationによる文字列の装飾
-        std::string decorated_data = decoration_ + msg->data + decoration_;
+        std::string decorated_data =
+            decoration_ + msg->data + decoration_;
         RCLCPP_INFO(this->get_logger(), "%s", decorated_data.c_str());
         pub_->publish(std::move(msg));
       };
@@ -65,30 +66,20 @@ public:
 
     // decorationパラメータの宣言
     decoration_ = declare_parameter("decoration", "");
-    // パラメータ設定イベントのコールバック関数
-    auto parameter_callback =
-      [this](const std::vector<rclcpp::Parameter> params)
-          -> rcl_interfaces::msg::SetParametersResult {
-        auto result = rcl_interfaces::msg::SetParametersResult();
-        result.successful = false;
-        for (auto param : params) {
-          if (param.get_name() == "decoration") {
-            // decorationパラメータの設定
-            decoration_ = param.as_string();
-            result.successful = true;
-          }
-        }
-        return result;
-      };
-
-    // パラメータ設定イベントのコールバック関数設定
-    auto result = add_on_set_parameters_callback(parameter_callback);
+    param_subscriber_ = std::make_shared<
+        rclcpp::ParameterEventHandler>(this);
+    cb_handle_ = param_subscriber_->add_parameter_callback(
+        "decoration", [this](const rclcpp::Parameter & p) {
+          decoration_ = p.as_string();
+        });
   }
 
 private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Service<SetMessage>::SharedPtr srv_;
+  std::shared_ptr<rclcpp::ParameterEventHandler> param_subscriber_;
+  std::shared_ptr<rclcpp::ParameterCallbackHandle> cb_handle_;
   std::string data_;
   std::string decoration_;
 };
