@@ -50,7 +50,7 @@ public:
 
 private:
   rclcpp::Subscription<std_msgs::msg::String>::SharedPtr sub_;
-};
+};  // class ListenerComponent
 
 }  // namespace hello_world
 

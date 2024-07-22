@@ -58,7 +58,7 @@ public:
 private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
-};
+};  // class TalkerComponent
 
 }  // namespace hello_world
 
