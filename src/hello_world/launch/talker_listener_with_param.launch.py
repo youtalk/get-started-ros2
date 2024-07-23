@@ -28,10 +28,10 @@ def generate_launch_description():
             description='Message decoration string'),
         launch_ros.actions.Node(
             package='hello_world',
-            node_executable='talker_with_service_param',
-            node_name='talker', output='screen',
+            executable='talker_with_service_param',
+            name='talker', output='screen',
             parameters=[{'decoration': decoration}]),
         launch_ros.actions.Node(
             package='hello_world',
-            node_executable='listener', output='screen'),
+            executable='listener', output='screen'),
     ])
