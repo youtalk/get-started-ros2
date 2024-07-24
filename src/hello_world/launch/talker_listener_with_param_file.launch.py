@@ -13,24 +13,20 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-import launch.actions
 import launch.substitutions
 import launch_ros.actions
 import os
 
 
 def generate_launch_description():
-    params_file = launch.substitutions.LaunchConfiguration(
-        'params_file')
+    params = os.path.join(os.path.dirname(__file__), 'params.yaml')
 
     return LaunchDescription([
-        launch.actions.DeclareLaunchArgument(
-        'params_file', default_value=os.path.join(
-            os.path.dirname(__file__), 'params.yaml')),
         launch_ros.actions.Node(
             package='hello_world', namespace='hello_world',
             executable='talker_with_service_param',
-            name='talker', output='screen'),
+            name='talker', output='screen',
+            parameters=[params]),
         launch_ros.actions.Node(
             package='hello_world', namespace='hello_world',
             executable='listener', name='listener',
