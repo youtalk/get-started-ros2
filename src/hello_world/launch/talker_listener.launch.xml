@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+  <node_container pkg="rclcpp_components"
+                  exec="component_container_mt"
+                  name="talker_listener"
+                  namespace="hello_world">
+    <composable_node pkg="hello_world"
+                     plugin="hello_world::TalkerComponent"
+                     name="talker_component"
+                     namespace="hello_world" />
+    <composable_node pkg="hello_world"
+                     plugin="hello_world::ListenerComponent"
+                     name="listener_component"
+                     namespace="hello_world" />
+  </node_container>
+</launch>
