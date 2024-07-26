@@ -6,4 +6,6 @@
     xpointer="xpointer(/profile/*)"/>
   <xi:include href="node/parameters.xml"
     xpointer="xpointer(/profile/*)"/>
+  <xi:include href="node/types.xml"
+    xpointer="xpointer(/profile/*)"/>
 </profile>

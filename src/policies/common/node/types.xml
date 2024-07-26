@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile>
+  <services reply="ALLOW" request="ALLOW" >
+    <service>~/get_type_description</service>
+  </services>
+</profile>

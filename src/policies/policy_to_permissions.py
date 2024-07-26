@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+import glob
+from pathlib import Path
 
 from lxml import etree
 
@@ -32,21 +33,29 @@ policy_xsd = etree.XMLSchema(etree.parse(policy_xsd_path))
 permissions_xsl = etree.XSLT(etree.parse(permissions_xsl_path))
 permissions_xsd = etree.XMLSchema(etree.parse(permissions_xsd_path))
 
-# Get policy
-policy_xml_path = 'sample_policy.xml'
-policy_xml = etree.parse(policy_xml_path)
-policy_xml.xinclude()
+for policy_xml_path in glob.glob('*.policy.xml'):
 
-# Validate policy schema
-policy_xsd.assertValid(policy_xml)
+    # Get policy
+    policy_xml = etree.parse(policy_xml_path)
+    policy_xml.xinclude()
 
-# Transform policy
-permissions_xml = permissions_xsl(policy_xml)
+    # Validate policy schema
+    policy_xsd.assertValid(policy_xml)
 
-# Validate permissions schema
-permissions_xsd.assertValid(permissions_xml)
+    # Transform policy
+    permissions_xml = permissions_xsl(policy_xml)
 
-# Output permissions
-permissions_xml_path = os.path.join('permissions.xml')
-with open(permissions_xml_path, 'w') as f:
-    f.write(etree.tostring(permissions_xml, pretty_print=True).decode())
+    # Validate permissions schema
+    permissions_xsd.assertValid(permissions_xml)
+
+    # Get permissions directory
+    policy_name = Path(policy_xml_path).name
+    index_of_dot = policy_name.index('.')
+    policy_name = policy_name[:index_of_dot]
+    permissions_dir = Path('permissions') / policy_name
+    permissions_dir.mkdir(parents=True, exist_ok=True)
+
+    # Output permissions
+    permissions_xml_path = permissions_dir / 'permissions.xml'
+    with open(permissions_xml_path, 'w') as f:
+        f.write(etree.tostring(permissions_xml, pretty_print=True).decode())
