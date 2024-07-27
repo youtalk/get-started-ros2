@@ -31,9 +31,13 @@ class MinimalSubscriber(Node):
         self.get_logger().info(msg.data)
 
 
-if __name__ == '__main__':
+def main(args=None):
     rclpy.init(args=args)
     minimal_subscriber = MinimalSubscriber()
     rclpy.spin(minimal_subscriber)
     minimal_subscriber.destroy_node()
     rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

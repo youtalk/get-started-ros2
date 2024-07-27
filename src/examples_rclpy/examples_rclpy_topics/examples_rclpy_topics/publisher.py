@@ -37,7 +37,7 @@ class MinimalPublisher(Node):
         self.i += 1
 
 
-if __name__ == '__main__':
+def main(args=None):
     # Pythonクライアントライブラリの初期化
     rclpy.init(args=args)
     # minimal_publisherノードの作成
@@ -48,3 +48,7 @@ if __name__ == '__main__':
     minimal_publisher.destroy_node()
     # Pythonクライアントライブラリの終了
     rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
