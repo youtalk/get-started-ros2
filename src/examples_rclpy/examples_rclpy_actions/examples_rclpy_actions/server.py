@@ -69,7 +69,7 @@ class MinimalActionServer(Node):
         return result
 
 
-if __name__ == '__main__':
+def main(args=None):
     rclpy.init(args=args)
     minimal_action_server = MinimalActionServer()
     # マルチスレッドでminimal_action_serverノードを実行し、
@@ -78,3 +78,7 @@ if __name__ == '__main__':
     rclpy.spin(minimal_action_server, executor=executor)
     minimal_action_server.destroy()
     rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

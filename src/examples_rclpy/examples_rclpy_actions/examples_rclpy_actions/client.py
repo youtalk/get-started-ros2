@@ -68,9 +68,13 @@ class MinimalActionClient(Node):
             self.goal_response_callback)
 
 
-if __name__ == '__main__':
+def main(args=None):
     rclpy.init(args=args)
     action_client = MinimalActionClient()
     action_client.send_goal()
     rclpy.spin(action_client)
     action_client.destroy_node()
+
+
+if __name__ == '__main__':
+    main()
