@@ -37,7 +37,7 @@ class MinimalClient(Node):
         return self.cli.call_async(self.request)
 
 
-if __name__ == '__main__':
+def main(args=None):
     rclpy.init(args=args)
     minimal_client = MinimalClient()
     future = minimal_client.call_async()
@@ -56,3 +56,7 @@ if __name__ == '__main__':
 
     minimal_client.destroy_node()
     rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
