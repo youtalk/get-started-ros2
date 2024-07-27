@@ -62,7 +62,7 @@ class MinimalActionServer(Node):
             time.sleep(1)
 
         # アクションの実行結果の送信
-        goal_handle.succeeded()
+        goal_handle.succeed()
         result = Fibonacci.Result()
         result.sequence = msg.sequence
         self.get_logger().info('result: {0}'.format(result.sequence))
