@@ -15,15 +15,16 @@
 #include <functional>
 #include <vector>
 
-#include <rclcpp/rclcpp.hpp>
 #include <cv_bridge/cv_bridge.hpp>
 #include <image_transport/image_transport.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/objdetect.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/image_encodings.hpp>
 
-constexpr char[] kWindowName = "Result";
-constexpr char[] kClassifierFileName = "haarcascade_frontalface_alt.xml";
+const char* kWindowName = "Result";
+const char* kClassifierFileName = "haarcascade_frontalface_alt.xml";
 
 class FaceDetectionComponent : public rclcpp::Node {
 public:
@@ -31,7 +32,7 @@ public:
     cv::namedWindow(kWindowName);
 
     if (!classifier_.load(kClassifierFileName)) {
-      RCLCPP_ERROR(this->get_logger(), "%s not found", kClassifierName);
+      RCLCPP_ERROR(this->get_logger(), "%s not found", kClassifierFileName);
       std::abort();
     }
 
@@ -69,6 +70,6 @@ private:
   }
 
   cv::CascadeClassifier classifier_;
-  image_transport::Publisher::SharedPtr pub_;
-  image_transport::Subscriber::SharedPtr sub_;
+  std::shared_ptr<image_transport::Publisher> pub_;
+  std::shared_ptr<image_transport::Subscriber> sub_;
 };
