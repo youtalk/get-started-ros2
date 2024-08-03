@@ -35,7 +35,7 @@ public:
       this->create_publisher<sensor_msgs::msg::PointCloud2>(
       "filter_result", qos);
     sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
-        "/camera/depth/color/points",
+        "/camera/camera/depth/color/points",
         qos,
         std::bind(&OutlierRemovalFilterComponent::PointCloud2Callback,
       this, std::placeholders::_1) \
