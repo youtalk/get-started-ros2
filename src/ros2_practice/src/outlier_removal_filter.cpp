@@ -50,7 +50,7 @@ private:
   {
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(
       new pcl::PointCloud<pcl::PointXYZRGB>);
-    // sensor_msgs/PointCloud2型からpcl::PointXYZRGB型への変換
+    // sensor_msgs/PointCloud2型からpcl::PointCloud型への変換
     pcl::fromROSMsg(*msg, *cloud);
 
     // 外れ値除去処理
@@ -65,7 +65,7 @@ private:
 
     sensor_msgs::msg::PointCloud2::SharedPtr msg_filtered(
       new sensor_msgs::msg::PointCloud2);
-    // pcl::PointXYZRGB型からsensor_msgs/PointCloud2型への変換
+    // pcl::PointCloud型からsensor_msgs/PointCloud2型への変換
     pcl::toROSMsg(*cloud_filtered, *msg_filtered);
     msg_filtered->header = msg->header;
     pub_->publish(*msg_filtered);
