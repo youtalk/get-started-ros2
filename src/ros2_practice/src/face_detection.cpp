@@ -32,23 +32,24 @@ public:
   : Node("face_detection")
   {
     cv::namedWindow(kWindowName);
+    // haarcascadeのXMLファイルへのパス
     std::string classifier_path = declare_parameter("classifier_path",
       kClassifierPath);
 
+    // haarcascadeのXMLファイルの読み込みに失敗すると実行中断
     if (!classifier_.load(classifier_path)) {
       RCLCPP_ERROR(this->get_logger(), "%s not found",
         classifier_path.c_str());
       std::abort();
     }
 
-    RCLCPP_INFO(this->get_logger(), "%s found",
-      classifier_path.c_str());
-
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
+    // 顔検出結果トピックの送信
     pub_ = image_transport::create_publisher(this,
       "face_detection_result", qos);
+    // RealSenseカメラのカラー画像トピックの受信
     sub_ = image_transport::create_subscription(this,
-      "/camera/color/image_raw",
+      "/camera/camera/color/image_raw",
       std::bind(&FaceDetectionComponent::ImageCallback, this,
       std::placeholders::_1), "raw", qos);
   }
@@ -64,12 +65,14 @@ private:
   {
     cv_bridge::CvImagePtr cv_image;
     try {
+      // sensor_msgs/Image型からcv::Mat型への変換
       cv_image = cv_bridge::toCvCopy(msg, msg->encoding);
     } catch (cv_bridge::Exception & e) {
       RCLCPP_ERROR(this->get_logger(), "%s", e.what());
       return;
     }
 
+    // 顔検出処理
     cv::Mat gray;
     cv::cvtColor(cv_image->image, gray, cv::COLOR_BGR2GRAY);
     cv::equalizeHist(gray, gray);
@@ -77,11 +80,14 @@ private:
     classifier_.detectMultiScale(gray, faces, 1.1, 2,
       0 | cv::CASCADE_SCALE_IMAGE, cv::Size(30, 30));
     for (auto face: faces) {
+      // 顔検出領域を赤い枠で描画
       cv::rectangle(cv_image->image, face, cv::Scalar(255, 0, 0), 2);
     }
 
+    // 顔検出結果のウィンドウ表示
     cv::imshow(kWindowName, cv_image->image);
-    cv::waitKey(3);
+    cv::waitKey(1);
+    // cv::Mat型からsensor_msgs/Image型への変換と顔検出結果画像の送信
     pub_.publish(cv_image->toImageMsg());
   }
 
