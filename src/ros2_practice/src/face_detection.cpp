@@ -23,37 +23,49 @@
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/image_encodings.hpp>
 
-const char* kWindowName = "Result";
-const char* kClassifierPath = "haarcascade_frontalface_alt.xml";
+const char * kWindowName = "Result";
+const char * kClassifierPath = "haarcascade_frontalface_alt.xml";
 
 class FaceDetectionComponent : public rclcpp::Node {
 public:
-  FaceDetectionComponent() : Node("face_detection") {
+  FaceDetectionComponent()
+  : Node("face_detection")
+  {
     cv::namedWindow(kWindowName);
-    std::string classifier_path = declare_parameter("classifier_path", kClassifierPath);
+    std::string classifier_path = declare_parameter("classifier_path",
+      kClassifierPath);
 
     if (!classifier_.load(classifier_path)) {
-      RCLCPP_ERROR(this->get_logger(), "%s not found", classifier_path.c_str());
+      RCLCPP_ERROR(this->get_logger(), "%s not found",
+        classifier_path.c_str());
       std::abort();
     }
 
-    RCLCPP_INFO(this->get_logger(), "%s found", classifier_path.c_str());
+    RCLCPP_INFO(this->get_logger(), "%s found",
+      classifier_path.c_str());
 
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
-    pub_ = image_transport::create_publisher(this, "face_detection_result", qos);
-    sub_ = image_transport::create_subscription(this, "/camera/color/image_raw", std::bind(&FaceDetectionComponent::ImageCallback, this, std::placeholders::_1), "raw", qos);
+    pub_ = image_transport::create_publisher(this,
+      "face_detection_result", qos);
+    sub_ = image_transport::create_subscription(this,
+      "/camera/color/image_raw",
+      std::bind(&FaceDetectionComponent::ImageCallback, this,
+      std::placeholders::_1), "raw", qos);
   }
 
-  ~FaceDetectionComponent() {
+  ~FaceDetectionComponent()
+  {
     cv::destroyWindow(kWindowName);
   }
 
 private:
-  void ImageCallback(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
+  void ImageCallback(
+    const sensor_msgs::msg::Image::ConstSharedPtr & msg)
+  {
     cv_bridge::CvImagePtr cv_image;
     try {
       cv_image = cv_bridge::toCvCopy(msg, msg->encoding);
-    } catch (cv_bridge::Exception& e) {
+    } catch (cv_bridge::Exception & e) {
       RCLCPP_ERROR(this->get_logger(), "%s", e.what());
       return;
     }
@@ -62,7 +74,8 @@ private:
     cv::cvtColor(cv_image->image, gray, cv::COLOR_BGR2GRAY);
     cv::equalizeHist(gray, gray);
     std::vector<cv::Rect> faces;
-    classifier_.detectMultiScale(gray, faces, 1.1, 2, 0 | cv::CASCADE_SCALE_IMAGE, cv::Size(30, 30));
+    classifier_.detectMultiScale(gray, faces, 1.1, 2,
+      0 | cv::CASCADE_SCALE_IMAGE, cv::Size(30, 30));
     for (auto face: faces) {
       cv::rectangle(cv_image->image, face, cv::Scalar(255, 0, 0), 2);
     }

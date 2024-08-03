@@ -23,21 +23,29 @@
 
 class OutlierRemovalFilterComponent : public rclcpp::Node {
 public:
-  OutlierRemovalFilterComponent() : Node("outlier_removal_filter") {
+  OutlierRemovalFilterComponent()
+  : Node("outlier_removal_filter")
+  {
     mean_k_ = this->declare_parameter("mean_k", 50);
-    stddev_mul_thresh_ = this->declare_parameter("stddev_mul_thresh", 0.1);
+    stddev_mul_thresh_ = this->declare_parameter("stddev_mul_thresh",
+      0.1);
 
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
-    pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("filter_result", qos);
+    pub_ =
+      this->create_publisher<sensor_msgs::msg::PointCloud2>(
+      "filter_result", qos);
     sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
         "/camera/depth/color/points",
         qos,
-        std::bind(&OutlierRemovalFilterComponent::PointCloud2Callback, this, std::placeholders::_1) \
-    );
+        std::bind(&OutlierRemovalFilterComponent::PointCloud2Callback,
+      this, std::placeholders::_1) \
+      );
   }
 
 private:
-  void PointCloud2Callback(const sensor_msgs::msg::PointCloud2::SharedPtr msg) {
+  void PointCloud2Callback(
+    const sensor_msgs::msg::PointCloud2::SharedPtr msg)
+  {
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cloud);
 
@@ -46,10 +54,12 @@ private:
     filter.setMeanK(mean_k_);
     filter.setStddevMulThresh(stddev_mul_thresh_);
     filter.setNegative(false);
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(
+      new pcl::PointCloud<pcl::PointXYZ>);
     filter.filter(*cloud_filtered);
 
-    sensor_msgs::msg::PointCloud2::SharedPtr msg_filtered(new sensor_msgs::msg::PointCloud2);
+    sensor_msgs::msg::PointCloud2::SharedPtr msg_filtered(
+      new sensor_msgs::msg::PointCloud2);
     pcl::toROSMsg(*cloud_filtered, *msg_filtered);
     msg_filtered->header = msg->header;
     pub_->publish(*msg_filtered);
