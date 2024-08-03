@@ -16,7 +16,7 @@
 #include <pcl/point_types.h>
 #include <pcl/common/common.h>
 #include <pcl/io/pcd_io.h>
-#include <pcl/filters/voxel_grid.h>
+#include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
@@ -30,7 +30,7 @@ public:
     stddev_mul_thresh_ = this->declare_parameter(
       "stddev_mul_thresh", 0.1);
 
-    rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
+    rclcpp::SensorDataQoS qos;
     pub_ =
       this->create_publisher<sensor_msgs::msg::PointCloud2>(
         "filter_result", qos);
@@ -45,8 +45,8 @@ private:
   void PointCloud2Callback(
     const sensor_msgs::msg::PointCloud2::SharedPtr msg)
   {
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(
-      new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(
+      new pcl::PointCloud<pcl::PointXYZRGB>);
     pcl::fromROSMsg(*msg, *cloud);
 
     pcl::StatisticalOutlierRemoval<pcl::PointXYZRGB> filter;
@@ -54,8 +54,8 @@ private:
     filter.setMeanK(mean_k_);
     filter.setStddevMulThresh(stddev_mul_thresh_);
     filter.setNegative(false);
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(
-      new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_filtered(
+      new pcl::PointCloud<pcl::PointXYZRGB>);
     filter.filter(*cloud_filtered);
 
     sensor_msgs::msg::PointCloud2::SharedPtr msg_filtered(
