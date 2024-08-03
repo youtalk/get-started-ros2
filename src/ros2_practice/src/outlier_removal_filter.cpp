@@ -27,26 +27,26 @@ public:
   : Node("outlier_removal_filter")
   {
     mean_k_ = this->declare_parameter("mean_k", 50);
-    stddev_mul_thresh_ = this->declare_parameter("stddev_mul_thresh",
-      0.1);
+    stddev_mul_thresh_ = this->declare_parameter(
+      "stddev_mul_thresh", 0.1);
 
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
     pub_ =
       this->create_publisher<sensor_msgs::msg::PointCloud2>(
-      "filter_result", qos);
-    sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
-        "/camera/camera/depth/color/points",
-        qos,
-        std::bind(&OutlierRemovalFilter::PointCloud2Callback,
-      this, std::placeholders::_1) \
-      );
+        "filter_result", qos);
+    sub_ =
+      this->create_subscription<sensor_msgs::msg::PointCloud2>(
+        "/camera/camera/depth/color/points", qos,
+        std::bind(&OutlierRemovalFilter::PointCloud2Callback, this,
+          std::placeholders::_1));
   }
 
 private:
   void PointCloud2Callback(
     const sensor_msgs::msg::PointCloud2::SharedPtr msg)
   {
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(
+      new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cloud);
 
     pcl::StatisticalOutlierRemoval<pcl::PointXYZRGB> filter;
