@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/point_cloud2.hpp>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/common/common.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/filters/voxel_grid.h>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
 
-class OutlierRemovalFilterComponent : public rclcpp::Node {
+class OutlierRemovalFilter : public rclcpp::Node {
 public:
-  OutlierRemovalFilterComponent()
+  OutlierRemovalFilter()
   : Node("outlier_removal_filter")
   {
     mean_k_ = this->declare_parameter("mean_k", 50);
@@ -37,7 +37,7 @@ public:
     sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
         "/camera/camera/depth/color/points",
         qos,
-        std::bind(&OutlierRemovalFilterComponent::PointCloud2Callback,
+        std::bind(&OutlierRemovalFilter::PointCloud2Callback,
       this, std::placeholders::_1) \
       );
   }
@@ -70,3 +70,14 @@ private:
   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_;
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr sub_;
 };
+
+int main(int argc, char * argv[])
+{
+  setvbuf(stdout, NULL, _IONBF, BUFSIZ);
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<OutlierRemovalFilter>();
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+
+  return 0;
+}

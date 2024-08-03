@@ -26,9 +26,9 @@
 const char * kWindowName = "Result";
 const char * kClassifierPath = "haarcascade_frontalface_alt.xml";
 
-class FaceDetectionComponent : public rclcpp::Node {
+class FaceDetection : public rclcpp::Node {
 public:
-  FaceDetectionComponent()
+  FaceDetection()
   : Node("face_detection")
   {
     cv::namedWindow(kWindowName);
@@ -50,11 +50,11 @@ public:
     // RealSenseカメラのカラー画像トピックの受信
     sub_ = image_transport::create_subscription(this,
       "/camera/camera/color/image_raw",
-      std::bind(&FaceDetectionComponent::ImageCallback, this,
+      std::bind(&FaceDetection::ImageCallback, this,
       std::placeholders::_1), "raw", qos);
   }
 
-  ~FaceDetectionComponent()
+  ~FaceDetection()
   {
     cv::destroyWindow(kWindowName);
   }
@@ -100,7 +100,7 @@ int main(int argc, char * argv[])
 {
   setvbuf(stdout, NULL, _IONBF, BUFSIZ);
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<FaceDetectionComponent>();
+  auto node = std::make_shared<FaceDetection>();
   rclcpp::spin(node);
   rclcpp::shutdown();
 

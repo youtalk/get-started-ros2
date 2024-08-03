@@ -10,11 +10,11 @@ endif()
 # 依存パッケージ
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED COMPONENTS highgui imgproc objdetect)
+find_package(perception_pcl REQUIRED)
 
 # face_detectionノードのビルド設定
 add_executable(face_detection src/face_detection.cpp)
@@ -30,8 +30,17 @@ target_link_libraries(face_detection
   opencv_objdetect
 )
 
+# outlier_removal_filterノードのビルド設定
+add_executable(outlier_removal_filter src/outlier_removal_filter.cpp)
+ament_target_dependencies(outlier_removal_filter
+  "perception_pcl"
+  "rclcpp"
+  "sensor_msgs"
+)
+
 install(TARGETS
   face_detection
+  outlier_removal_filter
   DESTINATION lib/${PROJECT_NAME}
 )
 
