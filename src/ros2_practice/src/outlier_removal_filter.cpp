@@ -16,7 +16,7 @@
 #include <pcl/point_types.h>
 #include <pcl/common/common.h>
 #include <pcl/io/pcd_io.h>
-#include <pcl/filters/statistical_outlier_removal.h>
+#include <pcl/filters/voxel_grid.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
@@ -26,12 +26,10 @@ public:
   OutlierRemovalFilter()
   : Node("outlier_removal_filter")
   {
-    // 外れ値除去パラメータの読み込み
-    mean_k_ = declare_parameter("mean_k", 50);
-    stddev_mul_thresh_ = declare_parameter(
-      "stddev_mul_thresh", 0.1);
+    leaf_size_ = declare_parameter("leaf_size", 0.05);
+    RCLCPP_INFO(this->get_logger(), "leaf_size: %f", leaf_size_);
 
-    rclcpp::SensorDataQoS qos;
+    rclcpp::QoS qos(rclcpp::KeepLast(1));
     // 外れ値除去結果のトピック送信
     pub_ =
       create_publisher<sensor_msgs::msg::PointCloud2>(
@@ -46,21 +44,17 @@ public:
 
 private:
   void PointCloud2Callback(
-    const sensor_msgs::msg::PointCloud2::SharedPtr msg)
+    const sensor_msgs::msg::PointCloud2::ConstSharedPtr & msg)
   {
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(
-      new pcl::PointCloud<pcl::PointXYZRGB>);
-    // sensor_msgs/PointCloud2型からpcl::PointCloud型への変換
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(
+      new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cloud);
 
-    // 外れ値除去処理
-    pcl::StatisticalOutlierRemoval<pcl::PointXYZRGB> filter;
+    pcl::VoxelGrid<pcl::PointXYZ> filter;
     filter.setInputCloud(cloud);
-    filter.setMeanK(mean_k_);
-    filter.setStddevMulThresh(stddev_mul_thresh_);
-    filter.setNegative(false);
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_filtered(
-      new pcl::PointCloud<pcl::PointXYZRGB>);
+    filter.setLeafSize(leaf_size_, leaf_size_, leaf_size_);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(
+      new pcl::PointCloud<pcl::PointXYZ>);
     filter.filter(*cloud_filtered);
 
     sensor_msgs::msg::PointCloud2::SharedPtr msg_filtered(
@@ -71,8 +65,7 @@ private:
     pub_->publish(*msg_filtered);
   }
 
-  int mean_k_;
-  int stddev_mul_thresh_;
+  double leaf_size_;
   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_;
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr sub_;
 };
