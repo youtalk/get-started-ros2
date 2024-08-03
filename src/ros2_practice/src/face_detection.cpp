@@ -24,17 +24,20 @@
 #include <sensor_msgs/image_encodings.hpp>
 
 const char* kWindowName = "Result";
-const char* kClassifierFileName = "haarcascade_frontalface_alt.xml";
+const char* kClassifierPath = "haarcascade_frontalface_alt.xml";
 
 class FaceDetectionComponent : public rclcpp::Node {
 public:
   FaceDetectionComponent() : Node("face_detection") {
     cv::namedWindow(kWindowName);
+    std::string classifier_path = declare_parameter("classifier_path", kClassifierPath);
 
-    if (!classifier_.load(kClassifierFileName)) {
-      RCLCPP_ERROR(this->get_logger(), "%s not found", kClassifierFileName);
+    if (!classifier_.load(classifier_path)) {
+      RCLCPP_ERROR(this->get_logger(), "%s not found", classifier_path.c_str());
       std::abort();
     }
+
+    RCLCPP_INFO(this->get_logger(), "%s found", classifier_path.c_str());
 
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
     pub_ = image_transport::create_publisher(this, "face_detection_result", qos);
