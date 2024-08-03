@@ -21,10 +21,10 @@
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
 
-class OutlierRemovalFilter : public rclcpp::Node {
+class VoxelGridFilter : public rclcpp::Node {
 public:
-  OutlierRemovalFilter()
-  : Node("outlier_removal_filter")
+  VoxelGridFilter()
+  : Node("voxel_grid_filter")
   {
     leaf_size_ = declare_parameter("leaf_size", 0.05);
     RCLCPP_INFO(this->get_logger(), "leaf_size: %f", leaf_size_);
@@ -38,13 +38,13 @@ public:
     sub_ =
       create_subscription<sensor_msgs::msg::PointCloud2>(
         "/camera/camera/depth/color/points", qos,
-        std::bind(&OutlierRemovalFilter::PointCloud2Callback, this,
+        std::bind(&VoxelGridFilter::PointCloud2Callback, this,
           std::placeholders::_1));
   }
 
 private:
   void PointCloud2Callback(
-    const sensor_msgs::msg::PointCloud2::ConstSharedPtr & msg)
+    const sensor_msgs::msg::PointCloud2::SharedPtr msg)
   {
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(
       new pcl::PointCloud<pcl::PointXYZ>);
@@ -74,7 +74,7 @@ int main(int argc, char * argv[])
 {
   setvbuf(stdout, NULL, _IONBF, BUFSIZ);
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<OutlierRemovalFilter>();
+  auto node = std::make_shared<VoxelGridFilter>();
   rclcpp::spin(node);
   rclcpp::shutdown();
 

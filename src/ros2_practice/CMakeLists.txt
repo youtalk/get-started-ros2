@@ -35,14 +35,14 @@ target_link_libraries(face_detection
   opencv_objdetect
 )
 
-# outlier_removal_filterノードのビルド設定
-add_executable(outlier_removal_filter src/outlier_removal_filter.cpp)
-ament_target_dependencies(outlier_removal_filter
+# voxel_grid_filterノードのビルド設定
+add_executable(voxel_grid_filter src/voxel_grid_filter.cpp)
+ament_target_dependencies(voxel_grid_filter
   "pcl_conversions"
   "rclcpp"
   "sensor_msgs"
 )
-target_link_libraries(outlier_removal_filter
+target_link_libraries(voxel_grid_filter
   pcl_common
   pcl_io
   pcl_filters
@@ -50,7 +50,7 @@ target_link_libraries(outlier_removal_filter
 
 install(TARGETS
   face_detection
-  outlier_removal_filter
+  voxel_grid_filter
   DESTINATION lib/${PROJECT_NAME}
 )
 
