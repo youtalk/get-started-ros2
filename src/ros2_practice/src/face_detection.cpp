@@ -28,7 +28,7 @@ const char* kClassifierFileName = "haarcascade_frontalface_alt.xml";
 
 class FaceDetectionComponent : public rclcpp::Node {
 public:
-  FaceDetectionComponent() : Node("image_converter") {
+  FaceDetectionComponent() : Node("face_detection") {
     cv::namedWindow(kWindowName);
 
     if (!classifier_.load(kClassifierFileName)) {
@@ -56,20 +56,31 @@ private:
     }
 
     cv::Mat gray;
-    cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+    cv::cvtColor(cv_image->image, gray, cv::COLOR_BGR2GRAY);
     cv::equalizeHist(gray, gray);
     std::vector<cv::Rect> faces;
-    cascade.detectMultiScale(gray, faces, 1.1, 2, 0 | cv::CASCADE_SCALE_IMAGE, cv::Size(30, 30));
+    classifier_.detectMultiScale(gray, faces, 1.1, 2, 0 | cv::CASCADE_SCALE_IMAGE, cv::Size(30, 30));
     for (auto face: faces) {
-      cv::rectangle(image, face, cv::Scalar(255, 0, 0), 2);
+      cv::rectangle(cv_image->image, face, cv::Scalar(255, 0, 0), 2);
     }
 
     cv::imshow(kWindowName, cv_image->image);
     cv::waitKey(3);
-    pub_->publish(cv_image->toImageMsg());
+    pub_.publish(cv_image->toImageMsg());
   }
 
   cv::CascadeClassifier classifier_;
-  std::shared_ptr<image_transport::Publisher> pub_;
-  std::shared_ptr<image_transport::Subscriber> sub_;
+  image_transport::Publisher pub_;
+  image_transport::Subscriber sub_;
 };
+
+int main(int argc, char * argv[])
+{
+  setvbuf(stdout, NULL, _IONBF, BUFSIZ);
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<FaceDetectionComponent>();
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+
+  return 0;
+}

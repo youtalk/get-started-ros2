@@ -11,7 +11,7 @@ find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(image_transport REQUIRED)
-find_package(OpenCV REQUIRED COMPONENTS highgui imgproc)
+find_package(OpenCV REQUIRED COMPONENTS highgui imgproc objdetect)
 
 add_executable(face_detection src/face_detection.cpp)
 target_link_libraries(face_detection
@@ -19,7 +19,9 @@ target_link_libraries(face_detection
   image_transport::image_transport
   opencv_highgui
   opencv_imgproc
+  opencv_objdetect
   rclcpp::rclcpp
+  "${sensor_msgs_TARGETS}"
 )
 install(TARGETS
   face_detection
