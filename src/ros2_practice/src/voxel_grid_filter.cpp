@@ -26,11 +26,12 @@ public:
   VoxelGridFilter()
   : Node("voxel_grid_filter")
   {
+    // ボクセルグリッドフィルタリングのパラメータ読み込み
     leaf_size_ = declare_parameter("leaf_size", 0.05);
     RCLCPP_INFO(this->get_logger(), "leaf_size: %f", leaf_size_);
 
     rclcpp::QoS qos(rclcpp::KeepLast(1));
-    // 外れ値除去結果のトピック送信
+    // 点群ダウンサンプリング結果のトピック送信
     pub_ =
       create_publisher<sensor_msgs::msg::PointCloud2>(
         "filter_result", qos);
@@ -50,6 +51,7 @@ private:
       new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cloud);
 
+    // ボクセルグリッドによる点群サンプリング処理
     pcl::VoxelGrid<pcl::PointXYZ> filter;
     filter.setInputCloud(cloud);
     filter.setLeafSize(leaf_size_, leaf_size_, leaf_size_);
