@@ -40,7 +40,7 @@ public:
 
         // decorationによる文字列の装飾
         std::string decorated_data =
-            decoration_ + msg->data + decoration_;
+          decoration_ + msg->data + decoration_;
         RCLCPP_INFO(this->get_logger(), "%s", decorated_data.c_str());
         pub_->publish(std::move(msg));
       };
@@ -51,8 +51,8 @@ public:
 
     auto handle_set_message =
       [this](const std::shared_ptr<rmw_request_id_t> request_header,
-        const std::shared_ptr<SetMessage::Request> request,
-        std::shared_ptr<SetMessage::Response> response) -> void
+      const std::shared_ptr<SetMessage::Request> request,
+      std::shared_ptr<SetMessage::Response> response) -> void
       {
         (void)request_header;
         RCLCPP_INFO(this->get_logger(), "message %s -> %s",
@@ -68,10 +68,10 @@ public:
     decoration_ = declare_parameter("decoration", "");
     // decorationパラメータの監視
     param_subscriber_ = std::make_shared<
-        rclcpp::ParameterEventHandler>(this);
+      rclcpp::ParameterEventHandler>(this);
     cb_handle_ = param_subscriber_->add_parameter_callback(
         "decoration", [this](const rclcpp::Parameter & p) {
-          decoration_ = p.as_string();
+        decoration_ = p.as_string();
         });
   }
 

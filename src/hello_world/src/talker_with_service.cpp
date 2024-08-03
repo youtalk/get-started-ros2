@@ -49,8 +49,8 @@ public:
     // set_messageサービスのコールバック関数
     auto handle_set_message =
       [this](const std::shared_ptr<rmw_request_id_t> request_header,
-        const std::shared_ptr<SetMessage::Request> request,
-        std::shared_ptr<SetMessage::Response> response) -> void
+      const std::shared_ptr<SetMessage::Request> request,
+      std::shared_ptr<SetMessage::Response> response) -> void
       {
         (void)request_header;  // Lintツール対策
         RCLCPP_INFO(this->get_logger(), "message %s -> %s",

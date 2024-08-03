@@ -34,7 +34,7 @@ public:
   HELLO_WORLD_PUBLIC
   // コンストラクター引数をNodeOptionsに変更
   explicit TalkerComponent(const rclcpp::NodeOptions & options)
-    : Node("talker_component", options)
+  : Node("talker_component", options)
   {
     // タイマー実行されるイベントハンドラー関数
     auto publish_message =

@@ -33,7 +33,7 @@ public:
   HELLO_WORLD_PUBLIC
   // コンストラクター引数をNodeOptionsに変更
   explicit ListenerComponent(const rclcpp::NodeOptions & options)
-    : Node("listener_component", options)
+  : Node("listener_component", options)
   {
     // chatterトピックのコールバック関数
     auto callback =

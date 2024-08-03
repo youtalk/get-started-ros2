@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
 
   // パラメータ設定・取得サービスのクライアント
   auto parameters_client = std::make_shared<
-      rclcpp::SyncParametersClient>(node);
+    rclcpp::SyncParametersClient>(node);
   // パラメータ設定・取得サービスの起動待ち
   while (!parameters_client->wait_for_service(1s)) {
     if (!rclcpp::ok()) {
@@ -60,7 +60,8 @@ int main(int argc, char ** argv)
   std::stringstream ss;
   // パラメータの取得
   for (auto & parameter : parameters_client->get_parameters(
-      {"foo", "bar", "baz"})) {
+      {"foo", "bar", "baz"}))
+  {
     // パラメータ名とパラメータの型名のロギング
     ss << "\nParameter name: " << parameter.get_name();
     ss << "\nParameter value (" << parameter.get_type_name()

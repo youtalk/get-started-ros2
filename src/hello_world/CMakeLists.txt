@@ -52,8 +52,8 @@ custom_component(talker_component "hello_world::TalkerComponent")
 custom_component(listener_component "hello_world::ListenerComponent")
 
 install(DIRECTORY
-    launch
-    DESTINATION share/${PROJECT_NAME}/
+  launch
+  DESTINATION share/${PROJECT_NAME}/
 )
 
 ament_package()
