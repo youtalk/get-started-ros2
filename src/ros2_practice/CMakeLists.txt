@@ -14,7 +14,12 @@ find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED COMPONENTS highgui imgproc objdetect)
-find_package(perception_pcl REQUIRED)
+find_package(PCL REQUIRED COMPONENTS common io filters)
+find_package(pcl_conversions REQUIRED)
+
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
 
 # face_detectionノードのビルド設定
 add_executable(face_detection src/face_detection.cpp)
@@ -33,9 +38,14 @@ target_link_libraries(face_detection
 # outlier_removal_filterノードのビルド設定
 add_executable(outlier_removal_filter src/outlier_removal_filter.cpp)
 ament_target_dependencies(outlier_removal_filter
-  "perception_pcl"
+  "pcl_conversions"
   "rclcpp"
   "sensor_msgs"
+)
+target_link_libraries(outlier_removal_filter
+  pcl_common
+  pcl_io
+  pcl_filters
 )
 
 install(TARGETS
