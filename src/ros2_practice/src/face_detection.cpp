@@ -44,10 +44,10 @@ public:
     }
 
     rmw_qos_profile_t qos = rmw_qos_profile_sensor_data;
-    // 顔検出結果トピックの送信
+    // 顔検出結果のトピック送信
     pub_ = image_transport::create_publisher(this,
       "face_detection_result", qos);
-    // RealSenseカメラのカラー画像トピックの受信
+    // RealSenseカメラのカラー画像のトピック受信
     sub_ = image_transport::create_subscription(this,
       "/camera/camera/color/image_raw",
       std::bind(&FaceDetection::ImageCallback, this,

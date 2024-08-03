@@ -26,16 +26,19 @@ public:
   OutlierRemovalFilter()
   : Node("outlier_removal_filter")
   {
-    mean_k_ = this->declare_parameter("mean_k", 50);
-    stddev_mul_thresh_ = this->declare_parameter(
+    // 外れ値除去パラメータの読み込み
+    mean_k_ = declare_parameter("mean_k", 50);
+    stddev_mul_thresh_ = declare_parameter(
       "stddev_mul_thresh", 0.1);
 
     rclcpp::SensorDataQoS qos;
+    // 外れ値除去結果のトピック送信
     pub_ =
-      this->create_publisher<sensor_msgs::msg::PointCloud2>(
+      create_publisher<sensor_msgs::msg::PointCloud2>(
         "filter_result", qos);
+    // RealSenseカメラの点群のトピック受信
     sub_ =
-      this->create_subscription<sensor_msgs::msg::PointCloud2>(
+      create_subscription<sensor_msgs::msg::PointCloud2>(
         "/camera/camera/depth/color/points", qos,
         std::bind(&OutlierRemovalFilter::PointCloud2Callback, this,
           std::placeholders::_1));
@@ -47,8 +50,10 @@ private:
   {
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(
       new pcl::PointCloud<pcl::PointXYZRGB>);
+    // sensor_msgs/PointCloud2型からpcl::PointXYZRGB型への変換
     pcl::fromROSMsg(*msg, *cloud);
 
+    // 外れ値除去処理
     pcl::StatisticalOutlierRemoval<pcl::PointXYZRGB> filter;
     filter.setInputCloud(cloud);
     filter.setMeanK(mean_k_);
@@ -60,6 +65,7 @@ private:
 
     sensor_msgs::msg::PointCloud2::SharedPtr msg_filtered(
       new sensor_msgs::msg::PointCloud2);
+    // pcl::PointXYZRGB型からsensor_msgs/PointCloud2型への変換
     pcl::toROSMsg(*cloud_filtered, *msg_filtered);
     msg_filtered->header = msg->header;
     pub_->publish(*msg_filtered);
