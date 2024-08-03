@@ -80,7 +80,7 @@ private:
     classifier_.detectMultiScale(gray, faces, 1.1, 2,
       0 | cv::CASCADE_SCALE_IMAGE, cv::Size(30, 30));
     for (auto face: faces) {
-      // 顔検出領域を赤い枠で描画
+      // 顔検出領域を四角い枠で描画
       cv::rectangle(cv_image->image, face, cv::Scalar(255, 0, 0), 2);
     }
 
