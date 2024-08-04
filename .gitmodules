@@ -1,3 +1,0 @@
-[submodule "dynamixel_hardware_examples"]
-	path = src/dynamixel_hardware_examples
-	url = https://github.com/dynamixel-community/dynamixel_hardware_examples.git
