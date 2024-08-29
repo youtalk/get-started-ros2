@@ -8,9 +8,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-ins
 
 COPY src /get-started-ros2/src
 WORKDIR /get-started-ros2
-RUN ls /get-started-ros2/src
 
-RUN rosdep update && rosdep install --ignore-src --from-paths src
+RUN apt-get update \
+  && rosdep update \
+  && rosdep install --ignore-src --from-paths src
 
 RUN source /opt/ros/jazzy/setup.bash \
   && colcon build \
