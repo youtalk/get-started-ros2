@@ -2,16 +2,19 @@
 FROM ros:jazzy
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+RUN add-apt-repository universe \
+  && apt-get update \
+  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   ros-dev-tools \
-  && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* "$HOME"/.cache
+  && rm -rf /var/lib/apt/lists/*
 
 COPY src /get-started-ros2/src
 WORKDIR /get-started-ros2
 
 RUN apt-get update \
   && rosdep update \
-  && rosdep install --ignore-src --from-paths src
+  && rosdep install --ignore-src --from-paths src \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN source /opt/ros/jazzy/setup.bash \
   && colcon build \
