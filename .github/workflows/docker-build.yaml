@@ -21,6 +21,12 @@ jobs:
         with:
           submodules: true
 
+      - name: Check out dynamixel_hardware_examples repository
+        uses: actions/checkout@v4
+        with:
+          repository: dynamixel-community/dynamixel_hardware_examples
+          path: 'src/dynamixel_hardware_examples'
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
