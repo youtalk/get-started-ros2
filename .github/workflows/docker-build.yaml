@@ -1,0 +1,45 @@
+name: docker-build
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      artifacts-destination:
+        type: choice
+        description: Destination for the artifacts
+        options:
+          - registry
+          - tarball
+        default: tarball
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Check out dynamixel_hardware_examples repository
+        uses: actions/checkout@v4
+        with:
+          repository: dynamixel-community/dynamixel_hardware_examples
+          path: 'src/dynamixel_hardware_examples'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: youtalk/get-started-ros2:latest
