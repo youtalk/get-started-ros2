@@ -41,4 +41,4 @@ build
 install
 log
 
-src/dynamixel_hardware
+src/dynamixel_hardware_examples
