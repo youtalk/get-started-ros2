@@ -2,16 +2,17 @@
 FROM ros:jazzy
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN add-apt-repository universe \
-  && apt-get update \
+RUN apt-get update \
   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+  software-properties-common \
   ros-dev-tools \
   && rm -rf /var/lib/apt/lists/*
 
 COPY src /get-started-ros2/src
 WORKDIR /get-started-ros2
 
-RUN apt-get update \
+RUN add-apt-repository universe \
+  && apt-get update \
   && rosdep update \
   && rosdep install --ignore-src --from-paths src \
   && rm -rf /var/lib/apt/lists/*
