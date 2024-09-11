@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy version="0.2.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <enclaves>
+    <enclave path="/test_enclave">
+      <profiles>
+        <profile ns="/" node="talker">
+          <xi:include href="common/node.xml"
+            xpointer="xpointer(/profile/*)"/>
+	  <!--topics publish="ALLOW" -->
+            <topic>chatter</topic>
+	  <!--/topics-->
+        </profile>
+      </profiles>
+    </enclave>
+  </enclaves>
+</policy>

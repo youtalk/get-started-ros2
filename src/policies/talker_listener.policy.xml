@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy version="0.2.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <enclaves>
+    <enclave path="/talker_listener/talker">
+      <profiles>
+        <profile ns="/" node="talker">
+          <xi:include href="common/node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics publish="ALLOW" >
+            <topic>chatter</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/talker_listener/listener">
+      <profiles>
+        <profile ns="/" node="listener">
+          <xi:include href="common/node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW" >
+            <topic>chatter</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+  </enclaves>
+</policy>

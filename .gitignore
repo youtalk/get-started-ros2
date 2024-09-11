@@ -36,3 +36,9 @@
 
 _site
 .jekyll-cache
+
+build
+install
+log
+
+src/dynamixel_hardware_examples
