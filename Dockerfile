@@ -12,7 +12,7 @@ WORKDIR /get-started-ros2
 
 RUN apt-get update \
   && rosdep update \
-  && rosdep install --ignore-src --from-paths src \
+  && rosdep install --ignore-src --from-paths -y src \
   && rm -rf /var/lib/apt/lists/*
 
 RUN source /opt/ros/jazzy/setup.bash \
